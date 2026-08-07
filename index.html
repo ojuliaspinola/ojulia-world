@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hello World — Julia Spinola</title>
+<meta name="description" content="Hello World. The Julia Spinola system: five planets and two bodies on their way out.">
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+
+<main class="poster" id="top">
+  <div class="ground b"></div>
+  <div class="ground"></div>
+  <!-- BIG PRINTED SHAPES: the colour on this page is printed, not painted on the field -->
+  <div class="riso m" aria-hidden="true">
+    <svg viewBox="0 0 390 844" preserveAspectRatio="none" filter="url(#marker)">
+      <defs><pattern id="rdm" width="12" height="12" patternUnits="userSpaceOnUse">
+        <circle cx="6" cy="6" r="3.1" fill="#2B4EA2"/></pattern></defs>
+      <ellipse cx="20" cy="700" rx="215" ry="165" fill="#59C6C3" opacity=".58"/>
+      <ellipse cx="404" cy="372" rx="150" ry="158" fill="#E58BAE" opacity=".5"/>
+      <ellipse cx="66" cy="812" rx="140" ry="64" fill="url(#rdm)" opacity=".5"/>
+      <rect x="146" y="292" width="260" height="13" fill="#8E7BC4" opacity=".5"/>
+    </svg>
+  </div>
+  <div class="riso d" aria-hidden="true">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="none" filter="url(#marker)">
+      <defs><pattern id="rdd" width="13" height="13" patternUnits="userSpaceOnUse">
+        <circle cx="6.5" cy="6.5" r="3.3" fill="#2B4EA2"/></pattern></defs>
+      <ellipse cx="150" cy="810" rx="450" ry="245" fill="#59C6C3" opacity=".58"/>
+      <ellipse cx="1330" cy="140" rx="310" ry="205" fill="#E58BAE" opacity=".5"/>
+      <ellipse cx="470" cy="600" rx="265" ry="125" fill="url(#rdd)" opacity=".5"/>
+      <rect x="40" y="704" width="580" height="15" fill="#8E7BC4" opacity=".5"/>
+    </svg>
+  </div>
+
+  <!-- THE SUN: her name is the thing everything goes round -->
+  <div class="sun" aria-hidden="true">
+    <svg viewBox="0 0 400 400" filter="url(#marker)">
+      <g class="rays" fill="none" stroke="#17646B" stroke-width="10" stroke-linecap="round">
+        <path d="M200 40 V0"/><path d="M313 87 L341 59"/><path d="M360 200 H400"/>
+        <path d="M313 313 L341 341"/><path d="M200 360 V400"/><path d="M87 313 L59 341"/>
+        <path d="M40 200 H0"/><path d="M87 87 L59 59"/>
+      </g>
+      <circle cx="200" cy="200" r="146" fill="#59C6C3"/>
+      <circle cx="200" cy="200" r="166" fill="none" stroke="#17646B" stroke-width="6" opacity=".8"/>
+    </svg>
+  </div>
+
+  <!-- ORBIT SCRAWL: marker, not maths -->
+  <div class="scrawl m" aria-hidden="true">
+    <svg viewBox="0 0 390 844" preserveAspectRatio="none" filter="url(#marker)">
+      <g fill="none" stroke="#2B4EA2" stroke-linecap="round" opacity=".8">
+        <ellipse cx="205" cy="530" rx="205" ry="250" stroke-width="6"/>
+        <path d="M30 470 C120 560 300 545 378 430" stroke-width="7" stroke-dasharray="2 24"/>
+      </g>
+    </svg>
+  </div>
+  <div class="scrawl d" aria-hidden="true">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="none" filter="url(#marker)">
+      <g fill="none" stroke="#2B4EA2" stroke-linecap="round" opacity=".8">
+        <ellipse cx="960" cy="600" rx="600" ry="430" stroke-width="6"/>
+        <path d="M120 780 C420 880 900 720 1120 470" stroke-width="7" stroke-dasharray="2 26"/>
+      </g>
+    </svg>
+  </div>
+
+  <h1 class="wordmark">
+    <span class="hw">Hello World</span>
+    <span class="nm" aria-hidden="true"><span data-t="Julia">Julia</span><span data-t="Spinola">Spinola</span></span>
+    <span class="hid">Julia Spinola</span>
+  </h1>
+  <p class="sub"><em>00</em>The sun</p>
+
+  <!-- the figure, over the type, unbothered -->
+  <div class="figure" aria-hidden="true">
+    <svg viewBox="0 0 300 270" filter="url(#marker)">
+      <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <g stroke="#14181B" stroke-width="19">
+          <circle cx="158" cy="42" r="27"/>
+          <path d="M152 70 C160 104 166 130 172 152"/>
+          <path d="M156 84 C124 70 92 60 58 62"/>
+          <path d="M160 96 C196 104 228 96 252 72"/>
+          <path d="M172 152 C146 176 112 196 74 204"/>
+          <path d="M172 154 C196 178 208 214 202 250"/>
+        </g>
+        <g stroke="#8E7BC4" stroke-width="11">
+          <circle cx="158" cy="42" r="27"/>
+          <path d="M152 70 C160 104 166 130 172 152"/>
+          <path d="M156 84 C124 70 92 60 58 62"/>
+          <path d="M160 96 C196 104 228 96 252 72"/>
+          <path d="M172 152 C146 176 112 196 74 204"/>
+          <path d="M172 154 C196 178 208 214 202 250"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <p class="say"><b>Julia — one line, here</b>[ your line goes here ]</p>
+
+  <ul class="bodies">
+    <li class="body" id="b-portfolio">
+      <a href="/portfolio/">
+        <span class="disc m-riso"></span>
+        <span class="moon m1"><img src="/assets/img/seikyu.jpg" alt=""></span>
+        <span class="moon m2"><img src="/assets/img/duskfade.jpg" alt=""></span>
+        <svg class="ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="47"/></svg>
+        <span class="lab" data-t="Portfolio">Portfolio</span>
+        <i class="n">01</i>
+      </a>
+    </li>
+
+    <li class="body" id="b-garden">
+      <a href="/garden/">
+        <span class="disc m-cut" style="--tint:var(--moss)"><img src="/assets/img/digitalgarden.png" alt=""></span>
+        <svg class="ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="47"/></svg>
+        <span class="lab" data-t="Digital
+Garden">Digital
+Garden</span>
+        <i class="n">02</i>
+      </a>
+    </li>
+
+    <li class="body" id="b-art">
+      <a href="/art/">
+        <span class="disc m-cut" style="--tint:var(--aqua)"><img src="/assets/img/art.png" alt=""></span>
+        <svg class="ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="47"/></svg>
+        <span class="lab" data-t="Art">Art</span>
+        <i class="n">03</i>
+      </a>
+    </li>
+
+    <li class="body" id="b-about">
+      <a href="/about/">
+        <span class="disc m-photo"><img src="/assets/img/julia.jpg" alt="Julia, photographed upside down with a flash"></span>
+        <svg class="ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="47"/></svg>
+        <span class="lab" data-t="About">About</span>
+        <i class="n">04</i>
+      </a>
+    </li>
+
+    <li class="body" id="b-contact">
+      <a href="/contact/">
+        <span class="disc m-cut" style="--tint:var(--lilac)"><img src="/assets/img/contactsandsocials.png" alt=""></span>
+        <svg class="ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="47"/></svg>
+        <span class="lab" data-t="Contacts
+&amp; Socials">Contacts
+&amp; Socials</span>
+        <i class="n">05</i>
+      </a>
+    </li>
+  </ul>
+
+  <!-- LEAVING THE SYSTEM -->
+  <a class="gone" id="g-sub" href="https://juliaspinola.substack.com/">
+    <svg viewBox="0 0 200 40" aria-hidden="true" filter="url(#marker)">
+      <path class="trail" d="M2 31 C60 31 120 22 175 13"/>
+      <path d="M174 1 L199 13 L172 26 Z" fill="#E9612F"/>
+    </svg>
+    <span class="tag">Pure of Heart<i>Substack ↗ leaving</i></span>
+  </a>
+
+  <a class="gone" id="g-bts" href="https://www.beyondtomorrowstudios.com/">
+    <svg viewBox="0 0 200 40" aria-hidden="true" filter="url(#marker)">
+      <path class="trail" d="M2 31 C60 31 120 22 175 13"/>
+      <path d="M174 1 L199 13 L172 26 Z" fill="#E9612F"/>
+    </svg>
+    <span class="tag" style="transform:rotate(180deg)">Beyond Tomorrow<i>Studios ↗ leaving</i></span>
+  </a>
+
+  <div class="grit" aria-hidden="true"></div>
+
+</main>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="marker" x="-25%" y="-25%" width="150%" height="150%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.021" numOctaves="3" seed="11" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="chew" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.055" numOctaves="2" seed="4" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="3.4" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.62" numOctaves="1" seed="9" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.4 0 0 0 -1.06" result="m"/>
+      <feComposite in="d" in2="m" operator="out"/>
+    </filter>
+  </defs>
+</svg>
+<script src="/js/home.js"></script>
+</body>
+</html>
