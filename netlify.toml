@@ -45,6 +45,19 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
+[[headers]]
+  for = "/garden/"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# The garden IS this file. It must never be cached, or Julia's edit is live
+# on GitHub and invisible on the site.
+[[headers]]
+  for = "/garden/notes.md"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    Content-Type = "text/markdown; charset=utf-8"
+
 
 # LAUNCH SWITCH - keeps the whole site out of search results
 # TO GO LIVE: delete this block and set robots.txt back to Allow: /
