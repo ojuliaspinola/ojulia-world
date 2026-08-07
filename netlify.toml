@@ -39,3 +39,11 @@
   for = "/portfolio/"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
+
+
+# LAUNCH SWITCH - keeps the whole site out of search results
+# TO GO LIVE: delete this block and set robots.txt back to Allow: /
+[[headers]]
+for = "/*"
+[headers.values]
+X-Robots-Tag = "noindex, nofollow"
