@@ -1,6 +1,7 @@
 # juliaspinola — the site
 
-Two pages so far: **Hello World** (the solar system) and **Portfolio** (the lists).
+Three pages so far: **Hello World** (the solar system), **Portfolio** (the lists)
+and **Contact** (the transmission).
 Plain HTML, CSS and JavaScript. No build step, no framework, no npm. What is in
 this folder is exactly what goes on the internet.
 
@@ -8,10 +9,12 @@ this folder is exactly what goes on the internet.
 
 - `index.html` — Hello World, the landing page.
 - `portfolio/index.html` — the portfolio page, lives at `/portfolio/`.
+- `contact/index.html` — the contact page, lives at `/contact/`. No JavaScript.
 - `404.html` — shown when an address does not exist.
 - `css/base.css` — **the shared world**: the palette, the fonts, the paper, the grain, the off-register print, the focus rings. Change something here and it changes on every page.
 - `css/home.css` — only the solar system: planets, sun, the name, the figure.
 - `css/portfolio.css` — only the workshop: the lists, the fish tank, the scattered cut-outs.
+- `css/contact.css` — only the transmission: the lilac sheet, the aerial, the station board, the empty frames.
 - `js/home.js` — the planet physics (push them around; nothing else depends on it).
 - `js/portfolio.js` — the fish, and the "Surprise me" button.
 - `assets/fonts/` — Pixelify Sans, Silkscreen, Space Mono, self-hosted so nothing phones out to Google.
