@@ -1,2 +1,5 @@
+# Site is unfinished. Nothing indexed yet.
+# TO GO LIVE: change Disallow back to Allow, and delete the
+# LAUNCH SWITCH block at the bottom of netlify.toml.
 User-agent: *
-Allow: /
+Disallow: /
