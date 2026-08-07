@@ -1,0 +1,207 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   CONTACT — the transmission.
+   Same world as Hello World and Portfolio, third room: a pale lilac sheet,
+   arcs coming off the Earth, and a list of stations ordered by how likely a
+   reply actually is. Palette, paper, grain, misregistration, type roles,
+   focus rings and the pill all come from base.css — nothing is forked here.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root{
+  /* This room is a pale lilac sheet. It is not a new colour: it is --lilac,
+     the palette purple, printed at low ink coverage. Cream is Hello World,
+     pale aqua is Portfolio, this is the third ground. */
+  --paper:var(--cream);
+  --paper-2:#E3D7BE;
+  /* the same plates, printed a touch heavier than Portfolio, lighter than home */
+  --misregister:.58;
+  --grain-mul:.42;
+  --grain-overlay:.3;
+}
+@supports (color:color-mix(in srgb,red,white)){
+  :root{
+    --paper:color-mix(in srgb,var(--lilac) 22%,#fff);
+    --paper-2:color-mix(in srgb,var(--lilac) 42%,#fff);
+  }
+}
+
+/* ── BIG PRINTED SHAPES. ambient — the arcs and the list carry the page ──── */
+.riso{background-repeat:no-repeat;
+  background-image:
+    radial-gradient(closest-side,rgba(229,139,174,.42) 99%,rgba(229,139,174,0) 100%),
+    radial-gradient(closest-side,rgba(89,198,195,.34) 99%,rgba(89,198,195,0) 100%),
+    radial-gradient(closest-side,rgba(239,230,210,.6) 99%,rgba(239,230,210,0) 100%),
+    linear-gradient(rgba(23,100,107,.4),rgba(23,100,107,.4));
+  background-size:280px 190px,250px 250px,320px 210px,140px 8px;
+  background-position:-16% 74%,112% 96%,104% 33%,6% 47%}
+/* one riso plate of dots, printed off to the side */
+.dots{position:absolute;inset:0;z-index:1;pointer-events:none;mix-blend-mode:multiply;opacity:.55;
+  background-repeat:repeat;
+  background-image:radial-gradient(var(--blue) 26%,transparent 28%);
+  background-size:13px 13px;
+  -webkit-mask-image:radial-gradient(closest-side,#000 58%,transparent 100%);
+  mask-image:radial-gradient(closest-side,#000 58%,transparent 100%);
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  -webkit-mask-size:230px 140px;mask-size:230px 140px;
+  -webkit-mask-position:100% 140px;mask-position:100% 140px}
+
+/* ── THE ROOM ────────────────────────────────────────────────────────────── */
+/* .wrap .top .back .meta .title .mid .note all live in base.css */
+.lede{margin:.85em 0 0;font-family:var(--micro);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);
+  max-width:34ch}
+.lede b{font-weight:400;color:var(--ink)}
+
+/* ── THE RECEIVER ────────────────────────────────────────────────────────── */
+/* the masthead owns the title and the planet, so the two can never collide */
+.masthead{position:relative}
+.aerial{position:relative;width:118px;margin:24px 6px 0 auto;z-index:9}
+.arcs{position:absolute;left:50%;top:50%;width:236%;height:236%;transform:translate(-50%,-50%);
+  overflow:visible;mix-blend-mode:multiply;pointer-events:none}
+.globe{display:block;position:relative;border-radius:50%;overflow:hidden;
+  box-shadow:inset 0 0 0 5px var(--ink);background:var(--paper);
+  background-image:radial-gradient(var(--aqua) 26%,transparent 28%);
+  background-size:11px 11px;background-blend-mode:multiply}
+.globe img{width:100%;height:auto;filter:contrast(1.06) saturate(1.1)}
+.aerial .cap{display:block;margin-top:9px;text-align:center;font-family:var(--micro);font-size:9px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.aerial .cap i{display:block;font-style:normal;font-size:8px;letter-spacing:.1em;color:var(--teal);margin-top:.5em}
+
+/* ── SECTION HEADS ───────────────────────────────────────────────────────── */
+.sec-h{font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:.03em;text-transform:uppercase;
+  margin:0;padding:0 0 .5em;border-bottom:1px solid rgba(20,24,27,.5)}
+
+/* ── THE BOARD. this is the page ─────────────────────────────────────────── */
+.board{margin:34px 0 0}
+.key{display:flex;flex-wrap:wrap;gap:6px 16px;margin:11px 0 0;
+  font-family:var(--micro);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey)}
+.key .k2 i{font-style:normal;color:var(--coral)}
+
+.stations{list-style:none;margin:16px 0 0;padding:0;counter-reset:none}
+.st{display:grid;grid-template-columns:26px minmax(0,1fr) auto;column-gap:10px;row-gap:8px;
+  align-items:start;padding:16px 0 17px;border-bottom:1px solid rgba(20,24,27,.16)}
+.st:first-child{border-top:1px solid rgba(20,24,27,.16)}
+
+.idx{grid-column:1;grid-row:1;font-family:var(--micro);font-style:normal;font-size:10px;letter-spacing:.06em;
+  color:var(--teal);padding-top:2px}
+.sig{grid-column:3;grid-row:1;display:inline-flex;gap:3px;align-items:center;padding-top:4px}
+.sig b{width:7px;height:7px;border:1.5px solid var(--ink);opacity:.32}
+.sig.s1 b:nth-child(-n+1),.sig.s2 b:nth-child(-n+2),.sig.s3 b:nth-child(-n+3),
+.sig.s4 b:nth-child(-n+4),.sig.s5 b:nth-child(-n+5){background:var(--ink);opacity:1}
+
+/* the station itself */
+.stn{grid-column:2;grid-row:1;display:grid;grid-template-columns:13px minmax(0,1fr);gap:5px 9px;
+  text-decoration:none;color:var(--ink);position:relative}
+.ico{grid-column:1;grid-row:1;width:13px;height:13px;color:var(--teal);transform:translateY(2px);
+  transition:transform .2s cubic-bezier(.34,1.8,.5,1)}
+.head{grid-column:2;grid-row:1;display:flex;flex-wrap:wrap;align-items:baseline;gap:3px 9px}
+.st .nm{font-size:13.5px;line-height:1.3;letter-spacing:-.01em;position:relative;display:inline-block}
+/* hover: a second plate lands a hair off register, wiped in from the left */
+.st .nm::before{content:"";position:absolute;left:-4px;right:-5px;top:.14em;bottom:.02em;background:var(--pink);
+  mix-blend-mode:multiply;z-index:-1;opacity:0;transform:translate(3px,2px) scaleX(.06);transform-origin:left center;
+  transition:opacity .16s ease,transform .24s cubic-bezier(.3,1.2,.4,1)}
+.role{font-family:var(--micro);font-style:normal;font-size:8px;letter-spacing:.09em;color:var(--teal);text-transform:uppercase}
+.tag{font-family:var(--micro);font-style:normal;font-size:8px;letter-spacing:.09em;color:var(--grey);text-transform:uppercase;
+  border:1px dashed rgba(20,24,27,.4);padding:.25em .45em .2em}
+.dest{grid-column:2;grid-row:2;font-family:var(--micro);font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--grey);word-break:break-word}
+/* SIGNAL: coral means one thing on this site — this link leaves it */
+.arw{font-style:normal;font-size:11px;line-height:0;color:var(--coral);margin-left:.6em;
+  transition:transform .18s ease}
+a.stn .dest{color:var(--teal)}
+a.stn:hover .nm::before,a.stn:focus-visible .nm::before{opacity:.85;transform:translate(3px,2px) scaleX(1)}
+a.stn:hover .ico,a.stn:focus-visible .ico{transform:translateY(1px) rotate(-8deg);color:var(--coral)}
+a.stn:hover .arw,a.stn:focus-visible .arw{transform:translate(3px,-3px)}
+a.stn:focus-visible{outline:2.5px var(--focus-ring);outline-offset:6px}
+
+/* listed, not live — a station she has not filled in yet */
+.stn.wait{color:var(--grey)}
+.stn.wait .ico{color:var(--grey);opacity:.8}
+.stn.wait .dest{color:var(--grey)}
+
+/* the mechanic: what actually happens if you use this. her words, not mine.
+   hatched, because an empty slot should look like an empty slot — and never
+   like a form field. there is no form on this page. */
+.rep{grid-column:2/-1;grid-row:2;margin:0;padding:8px 10px 7px;
+  border:1.5px dashed rgba(20,24,27,.34);
+  background-image:repeating-linear-gradient(45deg,rgba(20,24,27,.055) 0 5px,rgba(20,24,27,0) 5px 11px);
+  font-family:var(--micro);font-size:8px;line-height:1.7;letter-spacing:.1em;text-transform:uppercase;color:var(--grey)}
+.rep .lab{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:.6em}
+.rep b{font-weight:400;color:var(--teal)}
+.rep i{font-style:normal;color:var(--grey);opacity:.85}
+.flag{grid-column:2/-1;grid-row:2;margin:0;padding:6px 9px 5px;
+  border:1.5px dashed rgba(20,24,27,.34);
+  font-family:var(--micro);font-size:8px;line-height:1.7;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--grey)}
+.st:has(.flag) .rep{grid-row:3}
+
+.todo{margin:16px 0 0;padding:9px 10px;border:1.5px dashed rgba(20,24,27,.35);
+  font-family:var(--micro);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey)}
+
+/* ── THE NOTE. two frames waiting for one sheet of paper each ────────────── */
+.slots{margin:52px 0 0}
+.slot-g{display:grid;grid-template-columns:1fr;gap:34px;margin:22px 0 0;justify-content:start}
+.slot{margin:0}
+.frame{position:relative;aspect-ratio:4/5;max-width:300px;border:2.5px solid var(--ink);background:transparent;
+  display:flex;align-items:center;justify-content:center}
+.slot.small .frame{aspect-ratio:1/1;max-width:236px;border-width:2px;border-style:dashed;transform:rotate(-1.2deg)}
+/* faint ruled paper, so the frame reads as a waiting sheet, not a grey box */
+.rule{position:absolute;inset:14px;opacity:.5;
+  background-image:repeating-linear-gradient(rgba(20,24,27,0) 0 15px,rgba(20,24,27,.16) 15px 16px)}
+/* crop marks in the corners */
+.mk{position:absolute;width:15px;height:15px}
+.mk.tl{left:8px;top:8px;border-left:2px solid var(--ink);border-top:2px solid var(--ink)}
+.mk.tr{right:8px;top:8px;border-right:2px solid var(--ink);border-top:2px solid var(--ink)}
+.mk.bl{left:8px;bottom:8px;border-left:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.mk.br{right:8px;bottom:8px;border-right:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+/* two strips of tape, already stuck to the wall, holding nothing yet */
+.tape{position:absolute;width:74px;height:19px;background:var(--aqua);opacity:.55;mix-blend-mode:multiply}
+.tape.t1{left:-16px;top:22px;transform:rotate(-34deg)}
+.tape.t2{right:-18px;bottom:34px;transform:rotate(-27deg)}
+.slot.small .tape.t1{width:60px;left:-13px;top:16px}
+.empty{position:relative;font-family:var(--micro);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--grey);text-align:center;padding:0 12px}
+.slot figcaption{margin:13px 0 0;font-size:11px;line-height:1.65;letter-spacing:.01em;color:var(--ink);max-width:44ch}
+.slot figcaption b{display:block;font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.03em;
+  text-transform:uppercase;color:var(--ink);margin-bottom:.55em}
+.slot figcaption code{font-family:var(--mono);font-size:10px;background:var(--paper-2);padding:.15em .35em;
+  overflow-wrap:break-word}
+
+/* ── BOTTOM ──────────────────────────────────────────────────────────────── */
+.mid{margin-top:58px}
+.foot{display:flex;flex-wrap:wrap;gap:14px 26px;align-items:baseline;margin:56px 0 0;
+  padding-top:20px;border-top:1px solid rgba(20,24,27,.3)}
+.fwd:hover i,.fwd:focus-visible i{transform:translateX(4px)}
+
+/* ── WIDER ROOMS ─────────────────────────────────────────────────────────── */
+@media (min-width:720px){
+  .wrap{padding:36px clamp(28px,5vw,74px) 88px}
+  .riso{background-size:430px 290px,380px 380px,470px 300px,190px 9px;
+    background-position:-10% 88%,108% 26%,102% 78%,4% 34%}
+  .dots{opacity:.5;-webkit-mask-size:340px 150px;mask-size:340px 150px;
+    -webkit-mask-position:100% 60px;mask-position:100% 60px}
+  .lede{max-width:none}
+  .sec-h{font-size:16px}
+
+  /* the receiver moves up beside the title and gets bigger */
+  .masthead{display:grid;grid-template-columns:minmax(0,1fr) clamp(132px,14.5vw,178px);
+    gap:clamp(24px,4vw,64px);align-items:start}
+  .aerial{width:100%;margin:4px 0 0}
+
+  .board{margin-top:36px}
+  .st{grid-template-columns:34px 58px minmax(220px,1.3fr) minmax(200px,.78fr);
+    column-gap:clamp(16px,2.4vw,34px);row-gap:7px;align-items:start;padding:15px 0 16px}
+  .idx{grid-column:1;grid-row:1}
+  .sig{grid-column:2;grid-row:1;padding-top:3px}
+  .stn{grid-column:3;grid-row:1}
+  .rep{grid-column:4;grid-row:1;margin-top:-3px}
+  .flag{grid-column:3;grid-row:2;padding-top:2px}
+  .st:has(.flag) .rep{grid-row:1}
+
+  .slot-g{grid-template-columns:minmax(0,auto) minmax(0,auto);gap:clamp(34px,6vw,96px);align-items:start;margin-top:26px}
+  .slot.small{margin-top:44px}
+  .mid{margin-top:76px}
+  .foot{margin-top:72px}
+}
+@media (min-width:1100px){
+  .masthead{grid-template-columns:minmax(0,1fr) 190px}
+  .st .nm{font-size:14px}
+}
