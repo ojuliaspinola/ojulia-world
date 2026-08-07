@@ -12,7 +12,7 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 /* ── FACES ───────────────────────────────────────────────────────────────── */
-@font-face{font-family:'Pixelify Sans';font-style:normal;font-weight:700;font-display:swap;src:url(../assets/fonts/pixelify-sans-700.woff2) format('woff2')}
+@font-face{font-family:'Pixelify Sans';font-style:normal;font-weight:700;font-display:swap;src:url(../assets/fonts/pixelify-sans-700-v2.woff2) format('woff2')}
 @font-face{font-family:'Silkscreen';font-style:normal;font-weight:400;font-display:swap;src:url(../assets/fonts/silkscreen-400.woff2) format('woff2')}
 @font-face{font-family:'Space Mono';font-style:normal;font-weight:400;font-display:swap;src:url(../assets/fonts/space-mono-400.woff2) format('woff2')}
 @font-face{font-family:'Space Mono';font-style:normal;font-weight:700;font-display:swap;src:url(../assets/fonts/space-mono-700.woff2) format('woff2')}
