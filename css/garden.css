@@ -1,0 +1,316 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   DIGITAL GARDEN — the bed.
+
+   Fourth room in the same world. Cream is Hello World, pale aqua is
+   Portfolio, pale lilac is Contact; this one is a moss-tinted sheet, built
+   from --moss the way contact builds its lilac. Nothing here is a new
+   colour and nothing here forks base.css — the palette, the paper, the
+   grain, the off-register plates, the type roles, the pill, the focus ring
+   and the rule that --coral means "this link leaves the site" all come
+   from base.css untouched.
+
+   The page is a bed, not a feed. Nothing is ordered by when it was
+   written; there is no card grid, no pagination and no "read more". The
+   long body copy is set in columns so the notes flow like a page of a
+   notebook rather than sitting in boxes.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root{
+  /* moss printed at low ink coverage. fallback first, for anything without
+     color-mix; the mix below is the real value. */
+  --paper:#E2ECDC;
+  --paper-2:#C7DABD;
+  --misregister:.5;
+  --grain-mul:.4;
+  --grain-overlay:.3;
+
+  --line:rgba(20,24,27,.16);
+  --line-2:rgba(20,24,27,.32);
+}
+@supports (color:color-mix(in srgb,red,white)){
+  :root{
+    --paper:color-mix(in srgb,var(--moss) 20%,#fff);
+    --paper-2:color-mix(in srgb,var(--moss) 38%,#fff);
+    --moss-ink:color-mix(in srgb,var(--moss) 78%,var(--ink));
+    --line:color-mix(in srgb,var(--moss) 34%,transparent);
+    --line-2:color-mix(in srgb,var(--moss) 62%,transparent);
+  }
+}
+:root{--moss-ink:#4B7038}
+
+/* ── BIG PRINTED SHAPES ──────────────────────────────────────────────────── */
+.riso{background-repeat:no-repeat;
+  background-image:
+    radial-gradient(closest-side,rgba(108,158,82,.42) 99%,rgba(108,158,82,0) 100%),
+    radial-gradient(closest-side,rgba(239,230,210,.66) 99%,rgba(239,230,210,0) 100%),
+    radial-gradient(closest-side,rgba(89,198,195,.3) 99%,rgba(89,198,195,0) 100%),
+    linear-gradient(rgba(142,123,196,.45),rgba(142,123,196,.45));
+  background-size:300px 210px,290px 190px,240px 240px,150px 8px;
+  background-position:-20% 22%,110% 58%,104% 8%,88% 15%}
+.dots{position:absolute;inset:0;z-index:1;pointer-events:none;mix-blend-mode:multiply;opacity:.5;
+  background-repeat:repeat;
+  background-image:radial-gradient(var(--blue) 26%,transparent 28%);
+  background-size:13px 13px;
+  -webkit-mask-image:radial-gradient(closest-side,#000 58%,transparent 100%);
+  mask-image:radial-gradient(closest-side,#000 58%,transparent 100%);
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  -webkit-mask-size:250px 150px;mask-size:250px 150px;
+  -webkit-mask-position:-10% 94%;mask-position:-10% 94%}
+
+/* ── THE ROOTS. this room's ambient drawing, the way the fish are the
+   portfolio's and the arcs are contact's. drawn, not computed. ──────────── */
+.roots{position:absolute;left:0;top:0;width:180px;height:100%;z-index:2;pointer-events:none;
+  mix-blend-mode:multiply;opacity:.5}
+.roots svg{width:100%;height:100%}
+
+/* ── THE ROOM ────────────────────────────────────────────────────────────── */
+/* .wrap .top .back .meta .title .mid .note .pill live in base.css */
+.lede{margin:.85em 0 0;font-family:var(--micro);font-size:9px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--teal);max-width:38ch}
+.lede b{font-weight:400;color:var(--ink)}
+.sec-h{font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:.03em;
+  text-transform:uppercase;margin:0;padding:0 0 .5em;border-bottom:1px solid rgba(20,24,27,.5);
+  display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.sec-h i{font-style:normal;font-family:var(--micro);font-size:10px;color:var(--teal)}
+.sec-note{margin:9px 0 0;font-size:11px;line-height:1.7;color:var(--ink);max-width:56ch}
+.sec-note b{font-weight:400;color:var(--teal)}
+.sec-note code{font-family:var(--mono);font-size:10.5px;background:var(--paper-2);
+  padding:.12em .32em;white-space:nowrap}
+
+/* ── THE BAR. search, paths, arrangement. sticky, because the bed is long ─ */
+.bar{position:sticky;top:0;z-index:30;margin:26px 0 0;padding:10px 0 9px;
+  background:var(--paper);border-bottom:1.5px solid var(--ink)}
+.bar::before{content:"";position:absolute;inset:-14px -30px 0;z-index:-1;background:var(--paper)}
+.seek{display:flex;align-items:baseline;gap:9px;border-bottom:1.5px dashed var(--line-2);padding-bottom:6px}
+.seek label{font-family:var(--micro);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--teal);white-space:nowrap}
+/* 16px is not a taste decision: below it, iOS zooms the whole page the moment
+   the field takes focus — and on this page typing anywhere takes focus. */
+#q{flex:1 1 auto;min-width:0;appearance:none;-webkit-appearance:none;border:0;background:transparent;
+  font-family:var(--mono);font-size:16px;color:var(--ink);padding:2px 0;border-radius:0}
+#q::placeholder{color:var(--grey);opacity:.75;font-size:12px}
+#q:focus{outline:none}
+#q:focus-visible{outline:none}
+.seek:focus-within{border-bottom-color:var(--ink)}
+#clear{appearance:none;border:1.5px solid var(--ink);background:transparent;cursor:pointer;
+  font-family:var(--micro);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);
+  padding:.45em .6em .35em;border-radius:999px}
+#clear:hover{background:var(--coral)}
+#readout{margin:7px 0 0;font-family:var(--micro);font-size:8px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--grey)}
+
+.rows{display:flex;flex-direction:column;gap:7px;margin:9px 0 0}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:5px 6px}
+.row>h2,.row>p.rl{margin:0;font-family:var(--micro);font-size:8px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--teal);width:100%}
+
+.chip{appearance:none;cursor:pointer;background:transparent;color:var(--ink);
+  border:1.5px solid var(--line-2);border-radius:999px;padding:.42em .75em .32em;
+  font-family:var(--micro);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;
+  display:inline-flex;align-items:baseline;gap:.5em;
+  transition:background-color .16s ease,transform .16s cubic-bezier(.34,1.8,.5,1)}
+.chip i{font-style:normal;font-size:8px;color:var(--teal)}
+.chip:hover{background:var(--paper-2);transform:rotate(-1.2deg)}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chip[aria-pressed=true] i{color:var(--aqua)}
+.chip.none{opacity:.42;cursor:default;border-style:dashed}
+.chip.none:hover{background:transparent;transform:none}
+.chip:focus-visible{outline:2.5px var(--focus-ring);outline-offset:4px}
+#near-host{display:inline-flex;flex-wrap:wrap;gap:4px 11px;vertical-align:baseline}
+.seed{font-family:var(--micro);font-size:8px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--grey);border-bottom:1px dotted var(--line-2);padding-bottom:.15em}
+.seed i{font-style:normal;opacity:.7;margin-left:.45em}
+.tiny{margin:2px 0 0;font-family:var(--micro);font-size:7.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--grey);opacity:.85;width:100%}
+
+/* ── THE STONES. the beliefs, printed as big as anything on the site.
+   a one-sentence note is the point of a garden, not a shortfall. ────────── */
+.stones{margin:42px 0 0}
+.stone-g{display:grid;grid-template-columns:1fr;gap:26px;margin:20px 0 0;align-items:start}
+.stone{margin:0;position:relative;padding:20px 18px 18px;border:2.5px solid var(--ink);
+  background:transparent}
+.stone::before{content:"";position:absolute;left:6px;right:-8px;top:9px;bottom:-7px;z-index:-1;
+  mix-blend-mode:multiply;opacity:.62}
+.stone.s0::before{background:var(--pink)}
+.stone.s1::before{background:var(--aqua)}
+.stone.s2::before{background:var(--lilac)}
+.stone.s3::before{background:var(--cream)}
+.st-q{margin:0;font-family:var(--display);font-weight:700;font-size:clamp(19px,5.6vw,27px);
+  line-height:1.06;letter-spacing:.01em;position:relative}
+.st-q a{text-decoration:none;color:var(--ink)}
+.st-q a:focus-visible{outline:2.5px var(--focus-ring);outline-offset:4px}
+.st-q::before{content:attr(data-t);position:absolute;left:-.026em;top:.045em;color:var(--blue);
+  mix-blend-mode:multiply;z-index:-1;pointer-events:none}
+.st-c{margin:12px 0 0;font-family:var(--micro);font-size:9px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--teal)}
+.st-c .unattr{font-style:normal;color:var(--grey);border-bottom:1px dashed var(--grey)}
+.st-b{margin:10px 0 0}
+.st-b p{margin:.55em 0 0;font-size:11.5px;line-height:1.7}
+
+/* ── THE FLAG. a note to herself, on the page, in the open ───────────────── */
+.n-flag{margin:11px 0 0;padding:7px 9px 6px;border:1.5px dashed rgba(20,24,27,.4);
+  background-image:repeating-linear-gradient(45deg,rgba(20,24,27,.055) 0 5px,rgba(20,24,27,0) 5px 11px);
+  font-family:var(--micro);font-size:8px;line-height:1.75;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--grey)}
+
+/* ── THE BED. every other note. columns, not cards ───────────────────────── */
+.bed{margin:44px 0 0}
+#bed-host{margin:18px 0 0}
+.n{break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid;
+  margin:0 0 26px;padding:0 0 22px 13px;border-bottom:1px solid var(--line);
+  border-left:2px solid var(--line-2);position:relative}
+.n::before{content:"";position:absolute;left:-2px;top:0;width:2px;height:26px;background:var(--moss-ink)}
+.n.t-scrap{border-left-style:dotted;transform:rotate(-.5deg)}
+.n.t-collection{border-left-width:5px;border-left-style:double}
+.n.t-source .n-t a{text-decoration-style:dotted}
+.n.lit,.stone.lit,.gh-i.lit{outline:2.5px dashed var(--coral);outline-offset:7px}
+
+.n-t{margin:0;font-family:var(--mono);font-weight:700;font-size:14px;line-height:1.35;
+  letter-spacing:-.012em;overflow-wrap:anywhere}
+.n-a{text-decoration:none;color:var(--ink);position:relative;display:inline}
+.n-a::before{content:"";position:absolute;left:-3px;right:-4px;top:.16em;bottom:.02em;
+  background:var(--moss);mix-blend-mode:multiply;z-index:-1;opacity:0;
+  transform:translate(3px,2px) scaleX(.06);transform-origin:left center;
+  transition:opacity .16s ease,transform .24s cubic-bezier(.3,1.2,.4,1)}
+.n-a:hover::before,.n-a:focus-visible::before{opacity:.7;transform:translate(3px,2px) scaleX(1)}
+.n-a:focus-visible{outline:2.5px var(--focus-ring);outline-offset:4px}
+
+.n-meta{margin:6px 0 0;display:flex;flex-wrap:wrap;align-items:baseline;gap:3px 8px;
+  font-family:var(--micro);font-size:8px;letter-spacing:.1em;text-transform:uppercase}
+.n-meta i{font-style:normal;color:var(--teal)}
+.n-meta i.k{border:1px solid var(--line-2);padding:.25em .45em .15em;color:var(--ink)}
+.n-meta i.odd{border-style:dashed;color:var(--grey)}
+.n-meta .cite{color:var(--ink);text-transform:none;font-family:var(--mono);font-size:10px;
+  letter-spacing:0}
+.n-meta i.t-belief{color:var(--blue)}
+.n-meta i.t-scrap,.n-meta i.t-collection{color:var(--lilac)}
+
+.n-b{margin:9px 0 0}
+.n-b p{margin:.62em 0 0;font-size:12px;line-height:1.72;letter-spacing:.005em;
+  overflow-wrap:anywhere}
+.n-b p:first-child{margin-top:0}
+.n-b code{font-family:var(--mono);font-size:11px;background:var(--paper-2);padding:.1em .3em}
+.n-b pre{margin:.7em 0 0;padding:8px 9px;border:1px solid var(--line-2);overflow-x:auto;
+  font-family:var(--mono);font-size:10.5px;line-height:1.6}
+.n-b.empty{font-family:var(--micro);font-size:8px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--grey)}
+
+/* ── LINKS INSIDE A NOTE ─────────────────────────────────────────────────── */
+/* a written link is solid. an unwritten one is visibly unwritten — that is
+   the feature, not a broken link. --coral is reserved for leaving the site. */
+.wl{color:var(--ink);text-decoration:none;border-bottom:1.5px solid var(--moss-ink);
+  padding-bottom:.05em}
+.wl:hover{background:var(--moss);mix-blend-mode:multiply}
+.wl:focus-visible{outline:2.5px var(--focus-ring);outline-offset:3px}
+.wl.gh{color:var(--grey);border-bottom:1.5px dotted var(--grey)}
+.wl.gh i{font-style:normal;margin-right:.28em;color:var(--blue)}
+.wl.gh:hover{background:transparent;color:var(--ink);border-bottom-color:var(--ink)}
+.ex{color:var(--ink);text-decoration:none;border-bottom:1.5px solid var(--coral)}
+.ex i{font-style:normal;color:var(--coral);font-size:.9em;margin-left:.25em}
+.ex:focus-visible{outline:2.5px var(--focus-ring);outline-offset:3px}
+
+.n-tags{margin:10px 0 0;display:flex;flex-wrap:wrap;gap:4px 5px}
+.tg{appearance:none;cursor:pointer;background:transparent;border:1px dashed var(--line-2);
+  color:var(--teal);font-family:var(--micro);font-size:7.5px;letter-spacing:.1em;
+  text-transform:uppercase;padding:.34em .5em .24em;border-radius:999px}
+.tg:hover{border-style:solid;background:var(--paper-2)}
+.tg:focus-visible{outline:2px var(--focus-ring);outline-offset:3px}
+
+.n-roots{margin:10px 0 0;padding:7px 0 0;border-top:1px dotted var(--line-2);
+  font-family:var(--micro);font-size:8px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--grey);display:flex;flex-wrap:wrap;gap:3px 10px;align-items:baseline}
+.n-roots b{font-weight:400;color:var(--moss-ink)}
+.n-roots a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line-2)}
+.n-roots a:hover{border-bottom-color:var(--ink)}
+.n-roots a:focus-visible{outline:2px var(--focus-ring);outline-offset:3px}
+
+/* ── THE UNWRITTEN. a writing list she wrote by accident ─────────────────── */
+.unwritten{margin:46px 0 0}
+.gh-l{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:1fr;gap:0}
+.gh-i{padding:11px 0 10px;border-bottom:1px dashed var(--line-2)}
+.gh-i:first-child{border-top:1px dashed var(--line-2)}
+.gh-t{display:block;font-size:13px;line-height:1.4;color:var(--grey);overflow-wrap:anywhere}
+.gh-t i{font-style:normal;color:var(--blue);margin-right:.45em}
+.gh-w{display:flex;flex-wrap:wrap;gap:2px 9px;margin-top:5px;font-family:var(--micro);
+  font-size:7.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey)}
+.gh-w a{color:var(--teal);text-decoration:none;border-bottom:1px solid var(--line-2)}
+.gh-w a:hover{color:var(--ink);border-bottom-color:var(--ink)}
+.gh-w a:focus-visible{outline:2px var(--focus-ring);outline-offset:3px}
+
+/* ── WHEN THERE IS NOTHING TO SHOW ───────────────────────────────────────── */
+#nothing,.trouble{margin:22px 0 0;padding:16px 15px 15px;border:2px dashed var(--ink);
+  background-image:repeating-linear-gradient(45deg,rgba(20,24,27,.05) 0 6px,rgba(20,24,27,0) 6px 13px)}
+.tr-h,#nothing b{display:block;font-family:var(--display);font-weight:700;font-size:14px;
+  letter-spacing:.02em;text-transform:uppercase;margin:0 0 .55em}
+.tr-b,#nothing span{display:block;font-size:11.5px;line-height:1.7;max-width:54ch;margin:0}
+.trouble .pill{margin-top:18px}
+
+/* ── HOW TO ADD A NOTE. for Julia, on the page, on purpose ───────────────── */
+.howto{margin:52px 0 0;padding:16px 15px 16px;border:1.5px solid var(--ink)}
+.howto h2{margin:0;font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.03em;
+  text-transform:uppercase}
+.howto p{margin:.75em 0 0;font-size:11.5px;line-height:1.72;max-width:58ch}
+.howto pre{margin:12px 0 0;padding:11px 12px;background:var(--paper-2);overflow-x:auto;
+  font-family:var(--mono);font-size:10.5px;line-height:1.75;white-space:pre-wrap;
+  overflow-wrap:anywhere}
+.howto .pill{margin-top:16px}
+
+/* ── NOSCRIPT. the honest answer: the file is the page ───────────────────── */
+.js-off{margin:26px 0 0;padding:16px 15px 15px;border:2.5px solid var(--ink)}
+.js-off h2{margin:0;font-family:var(--display);font-weight:700;font-size:15px;
+  letter-spacing:.03em;text-transform:uppercase}
+.js-off p{margin:.8em 0 0;font-size:12px;line-height:1.72;max-width:56ch}
+.js-off .pill{margin-top:18px}
+/* the loading line disappears the moment the garden draws */
+.boot{margin:22px 0 0;font-family:var(--micro);font-size:9px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--grey)}
+.grown .boot{display:none}
+.boot.late{font-family:var(--mono);font-size:11.5px;line-height:1.7;letter-spacing:0;
+  text-transform:none;color:var(--ink);max-width:52ch}
+.boot.late a{color:var(--ink)}
+/* Without script there is nothing to search, arrange or draw, so the
+   controls and the bed do not pretend otherwise. The noscript panel above
+   them is the whole answer: the file is the garden. */
+html:not(.js) .bar,html:not(.js) .bed{display:none}
+
+/* ── BOTTOM ──────────────────────────────────────────────────────────────── */
+.mid{margin-top:52px}
+.foot{display:flex;flex-wrap:wrap;gap:14px 26px;align-items:baseline;margin:52px 0 0;
+  padding-top:20px;border-top:1px solid rgba(20,24,27,.3)}
+.fwd:hover i,.fwd:focus-visible i{transform:translateX(4px)}
+
+/* ── WIDER ROOMS ─────────────────────────────────────────────────────────── */
+@media (min-width:720px){
+  .wrap{padding:36px clamp(28px,5vw,74px) 88px}
+  .riso{background-size:460px 300px,420px 270px,340px 340px,190px 9px;
+    background-position:-12% 30%,106% 74%,102% 4%,90% 12%}
+  .dots{-webkit-mask-size:360px 190px;mask-size:360px 190px;
+    -webkit-mask-position:-6% 95%;mask-position:-6% 95%}
+  .roots{width:250px}
+  .sec-h{font-size:16px}
+  .lede{max-width:none}
+
+  .bar{padding:14px 0 11px}
+  .seek label{font-size:9.5px}
+
+  .stone-g{grid-template-columns:1fr 1fr;gap:clamp(26px,3.6vw,44px)}
+  .stone{padding:24px 22px 20px}
+  .st-q{font-size:clamp(21px,2.9vw,31px)}
+
+  #bed-host{columns:2;column-gap:clamp(28px,4vw,54px)}
+  .n{margin-bottom:30px}
+  .gh-l{grid-template-columns:1fr 1fr;column-gap:clamp(28px,4vw,54px)}
+  .gh-i:nth-child(2){border-top:1px dashed var(--line-2)}
+
+  .howto{padding:20px 22px 22px}
+  .mid{margin-top:72px}
+  .foot{margin-top:68px}
+}
+@media (min-width:1100px){
+  #bed-host{columns:3}
+  .st-q{font-size:36px}
+  .stone{padding:30px 28px 24px}
+  .gh-l{grid-template-columns:1fr 1fr 1fr}
+  .gh-i:nth-child(3){border-top:1px dashed var(--line-2)}
+  .n-t{font-size:14.5px}
+}
