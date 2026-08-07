@@ -1,0 +1,110 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   BASE — the shared world.
+
+   Everything both pages agree on lives here: the palette, the faces, the
+   paper, the grain, the misregistration, the type roles, the pill, the
+   focus ring, stillness. Change the paper texture once here and it changes
+   on every page.
+
+   Where a page needs a different *value* of a shared rule (a different
+   paper colour, a slightly lighter grain), the rule stays here and the page
+   overrides the custom property. Do not fork the rule.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── FACES ───────────────────────────────────────────────────────────────── */
+@font-face{font-family:'Pixelify Sans';font-style:normal;font-weight:700;font-display:swap;src:url(../assets/fonts/pixelify-sans-700.woff2) format('woff2')}
+@font-face{font-family:'Silkscreen';font-style:normal;font-weight:400;font-display:swap;src:url(../assets/fonts/silkscreen-400.woff2) format('woff2')}
+@font-face{font-family:'Space Mono';font-style:normal;font-weight:400;font-display:swap;src:url(../assets/fonts/space-mono-400.woff2) format('woff2')}
+@font-face{font-family:'Space Mono';font-style:normal;font-weight:700;font-display:swap;src:url(../assets/fonts/space-mono-700.woff2) format('woff2')}
+
+/* ── INK ─────────────────────────────────────────────────────────────────── */
+:root{
+  --paper:#EFE6D2;   /* warm cream — the ground. portfolio overrides to aqua */
+  --paper-2:#E3D7BE; /* deeper paper, shadow, second riso pass */
+  --cream:#EFE6D2;   /* the hello world ground, printed elsewhere as a shape */
+  --ink:#14181B;
+  --teal:#17646B;
+  --aqua:#59C6C3;
+  --blue:#2B4EA2;    /* the offset / ghost colour */
+  --lilac:#8E7BC4;
+  --coral:#E9612F;   /* signal: this link leaves the site */
+  --pink:#E58BAE;
+  --moss:#6C9E52;
+  --grey:#55686C;    /* listed, not live */
+  --display:'Pixelify Sans','Silkscreen','Courier New',monospace;
+  --micro:'Silkscreen','Courier New',monospace;
+  --mono:'Space Mono','Courier New',ui-monospace,monospace;
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --grain2:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.35' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  /* dials the pages turn — same machinery, different amount of it */
+  --misregister:.75;  /* how much of the off-register plate shows */
+  --grain-mul:.44;    /* the coarse grain, multiplied */
+  --grain-overlay:.35;/* the soft grain, overlaid */
+  --touch:auto;       /* home sets manipulation; nothing else needs to */
+
+  /* one focus idiom for the whole site — width and offset stay local */
+  --focus-ring:dashed var(--ink);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+html,body{background:var(--paper-2);color:var(--ink)}
+body{font-family:var(--mono);-webkit-text-size-adjust:100%;overflow-x:hidden}
+a{color:inherit}
+img{display:block;max-width:100%}
+.hid{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ── THE SHEET ───────────────────────────────────────────────────────────── */
+.poster{position:relative;width:100%;min-height:100svh;overflow:hidden;isolation:isolate;touch-action:var(--touch)}
+.ground{position:absolute;inset:-4px;z-index:0;background:var(--paper);
+  clip-path:polygon(1.4% 0.6%,26% 0%,58% 1.1%,84% 0.2%,100% 1.4%,99.4% 24%,100% 61%,99% 88%,99.6% 100%,72% 99.3%,38% 100%,9% 99.2%,0.4% 99.8%,0% 72%,1% 41%,0% 18%)}
+/* the plate that printed a hair off register — only its fringe shows */
+.ground.b{background:var(--aqua);mix-blend-mode:multiply;transform:translate(9px,-7px) rotate(.25deg);opacity:var(--misregister)}
+
+/* ── PRINTED SHAPES + GRAIN ──────────────────────────────────────────────── */
+/* .riso is the plate layer. what gets printed on it is up to the page. */
+.riso{position:absolute;inset:0;z-index:1;pointer-events:none;mix-blend-mode:multiply}
+.grit{position:absolute;inset:0;z-index:70;pointer-events:none}
+.grit::before,.grit::after{content:"";position:absolute;inset:-20%}
+.grit::before{background-image:var(--grain);mix-blend-mode:multiply;opacity:var(--grain-mul)}
+.grit::after{background-image:var(--grain2);mix-blend-mode:screen;opacity:.2}
+.poster::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background-image:var(--grain2);mix-blend-mode:overlay;opacity:var(--grain-overlay)}
+
+/* ── THE ROOM. a plain sheet of content, used by every page that has one ─── */
+.wrap{position:relative;z-index:10;padding:24px 22px 64px;max-width:1240px;margin:0 auto}
+
+.top{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:baseline;justify-content:space-between;margin:0 0 34px}
+.back{font-family:var(--micro);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  text-decoration:none;color:var(--ink);border-bottom:1.5px solid var(--ink);padding-bottom:.25em}
+.back i{font-style:normal;display:inline-block;transition:transform .18s cubic-bezier(.34,1.7,.5,1)}
+.back:hover i,.back:focus-visible i{transform:translateX(-4px)}
+.back:focus-visible{outline:2.5px var(--focus-ring);outline-offset:5px}
+.meta{margin:0;font-family:var(--micro);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
+.meta em{font-style:normal;background:var(--ink);color:var(--aqua);padding:.3em .45em .25em;margin-right:.6em}
+
+/* ── TYPE ROLES ──────────────────────────────────────────────────────────── */
+/* the page title, with its ghost — a second impression, printed off register */
+.title{font-family:var(--display);font-weight:700;font-size:clamp(40px,13.5vw,92px);line-height:.94;
+  letter-spacing:.01em;text-transform:uppercase;margin:0;position:relative;display:inline-block}
+.title::before{content:attr(data-t);position:absolute;left:-.028em;top:.04em;color:var(--blue);
+  mix-blend-mode:multiply;z-index:-1}
+/* the centred block: a paragraph of body copy with a pill under it */
+.mid{margin:52px 0 0;text-align:center}
+/* a short paragraph of body copy, centred */
+.note{max-width:46ch;margin:0 auto;font-size:12px;line-height:1.7;letter-spacing:.01em;text-wrap:balance}
+.note b{display:block;font-family:var(--micro);font-weight:400;font-size:8px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--teal);margin-bottom:.9em}
+
+/* ── THE PILL ────────────────────────────────────────────────────────────── */
+.pill{display:inline-block;margin:26px 0 0;font-family:var(--micro);font-size:9px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink);text-decoration:none;padding:1em 1.9em .9em;
+  border:2px solid var(--ink);border-radius:999px;background:transparent;
+  transition:background-color .18s ease,transform .18s cubic-bezier(.34,1.8,.5,1)}
+.pill:hover,.pill:focus-visible{background:var(--coral);transform:rotate(-1.5deg)}
+.pill:focus-visible{outline:2.5px var(--focus-ring);outline-offset:5px}
+
+/* ── STILLNESS ───────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
