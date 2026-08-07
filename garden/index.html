@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Digital Garden &#8212; Julia Spinola</title>
+<meta name="description" content="A digital garden. Notes, beliefs, sources and scraps, linked to each other and never sorted by date. Grown from one markdown file.">
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/garden.css">
+<script>
+/* Marks the document as scriptable so the controls below — which only do
+   anything once notes.md has been read — are not shown to someone who
+   cannot use them. And if garden.js itself never arrives, say so rather
+   than leave "Reading notes.md..." on the screen for ever. */
+document.documentElement.className += " js";
+setTimeout(function () {
+  var d = document.documentElement, b = document.querySelector(".boot");
+  if (d.className.indexOf("grown") > -1 || document.querySelector(".trouble") || !b) return;
+  b.innerHTML = "The garden did not load. Everything in it lives in one plain-text " +
+    "file, so nothing is lost \u2014 <a href=\"/garden/notes.md\">read notes.md</a>.";
+  b.className = "boot late";
+}, 9000);
+</script>
+</head>
+<body>
+
+<main class="poster" id="top">
+  <div class="ground b"></div>
+  <div class="ground"></div>
+  <div class="riso" aria-hidden="true"></div>
+  <div class="dots" aria-hidden="true"></div>
+
+  <!-- THE ROOTS. drawn with the same marker filter as everything else -->
+  <div class="roots" aria-hidden="true">
+    <svg viewBox="0 0 250 1200" preserveAspectRatio="none" filter="url(#marker)">
+      <g fill="none" stroke="#6C9E52" stroke-linecap="round">
+        <path d="M96 -20 C96 120 44 190 52 300 C60 420 118 470 110 600 C104 720 40 780 52 900 C62 1010 96 1080 90 1220" stroke-width="6"/>
+        <path d="M52 300 C10 330 -8 372 -14 420" stroke-width="4"/>
+        <path d="M110 600 C160 630 182 676 186 730" stroke-width="4"/>
+        <path d="M52 900 C6 928 -6 964 -10 1010" stroke-width="3.5"/>
+        <path d="M78 160 C120 190 138 232 140 280" stroke-width="3"/>
+        <path d="M96 1080 C142 1104 160 1140 164 1186" stroke-width="3"/>
+      </g>
+      <g fill="#2B4EA2" opacity=".5">
+        <circle cx="-14" cy="420" r="7"/><circle cx="186" cy="730" r="6"/>
+        <circle cx="140" cy="280" r="5"/><circle cx="-10" cy="1010" r="6"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="wrap">
+
+    <header class="top">
+      <a class="back" href="/"><i>&#8592;</i> Hello World</a>
+      <p class="meta"><em>02</em> The garden</p>
+    </header>
+
+    <h1 class="title" data-t="Digital Garden">Digital Garden</h1>
+    <p class="lede">Nothing here is finished &#183; nothing here is sorted by date &#183; <b>an unwritten note is still a note</b></p>
+
+    <!-- ── WITH JAVASCRIPT OFF ────────────────────────────────────────────
+         The page is one markdown file read in the browser, so with JS off
+         there is nothing to render. Rather than fake it, we send people to
+         the file, which is the whole garden in plain text and reads fine.  -->
+    <noscript>
+      <section class="js-off">
+        <h2>The garden is one file</h2>
+        <p>This page reads <code>garden/notes.md</code> in your browser and draws it &#8212; the links, the backlinks, the unwritten notes. With JavaScript switched off there is nothing to draw it with.</p>
+        <p>That file is not a database. It is plain text, written to be read by a person, and it is the entire garden with nothing left out. Open it and you have everything this page would have shown you.</p>
+        <a class="pill" href="/garden/notes.md">Read notes.md &#8594;</a>
+        <a class="pill" href="https://github.com/ojuliaspinola/ojulia-world/blob/main/garden/notes.md">On GitHub &#8599;</a>
+      </section>
+    </noscript>
+
+    <!-- ── THE BAR ──────────────────────────────────────────────────────── -->
+    <div class="bar" id="sortbar">
+      <p class="seek">
+        <label for="q">Find</label>
+        <input id="q" type="search" autocomplete="off" autocorrect="off" spellcheck="false"
+               placeholder="type anywhere to narrow">
+        <button type="button" id="clear" hidden>Clear</button>
+      </p>
+      <p id="readout" aria-live="polite" role="status">&#8212;</p>
+
+      <div class="rows">
+        <div class="row" id="sort-host">
+          <p class="rl">Arrangement &#8212; never by date</p>
+          <button type="button" class="chip" data-o="az" aria-pressed="true"><span>A&#8211;Z</span></button>
+          <button type="button" class="chip" data-o="kind" aria-pressed="false"><span>By kind</span></button>
+          <button type="button" class="chip" data-o="roots" aria-pressed="false"><span>By roots</span></button>
+          <button type="button" class="chip" data-o="wander" aria-pressed="false"><span>Wander</span></button>
+        </div>
+
+        <div class="row" id="paths" hidden>
+          <h2 class="rl">Paths &#8212; a tag becomes one at three notes</h2>
+          <span id="path-host" style="display:contents"></span>
+          <span id="near-wrap" class="tiny" hidden>Not paths yet: <span id="near-host"></span></span>
+        </div>
+
+        <div class="row" id="shelves">
+          <h2 class="rl">Shelves &#8212; where a source came from</h2>
+          <span id="shelf-host" style="display:contents"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── THE STONES ───────────────────────────────────────────────────── -->
+    <section class="stones" id="stones" aria-labelledby="h-stones" hidden>
+      <h2 class="sec-h" id="h-stones">Beliefs</h2>
+      <p class="sec-note">Four things she keeps saying. A note that is one sentence and an attribution is a whole note &#8212; so these are the biggest type on the page.</p>
+      <div class="stone-g" id="stone-host"></div>
+    </section>
+
+    <!-- ── THE BED ──────────────────────────────────────────────────────── -->
+    <section class="bed" aria-labelledby="h-bed">
+      <h2 class="sec-h" id="h-bed">The bed <i>(<span id="count">&#8212;</span> notes &#183; <span id="link-n">&#8212;</span> links)</i></h2>
+      <p class="sec-note">Everything else, growing at its own speed. <b>Roots</b> under a note are the notes that point at it, worked out on the fly &#8212; nobody maintains them.</p>
+
+      <div id="bed-host">
+        <p class="boot">Reading garden/notes.md&#8230;</p>
+      </div>
+
+      <div id="nothing" hidden>
+        <b>Nothing matches that</b>
+        <span>The garden is small on purpose. Clear the search and have a wander instead &#8212; or write the note you were looking for.</span>
+      </div>
+    </section>
+
+    <!-- ── THE UNWRITTEN ────────────────────────────────────────────────── -->
+    <section class="unwritten" id="unwritten" aria-labelledby="h-un" hidden>
+      <h2 class="sec-h" id="h-un">Unwritten <i>(<span id="ghost-n">0</span>)</i></h2>
+      <p class="sec-note">Notes that other notes already link to, but which nobody has written. They are not broken links, they are a writing list Julia wrote by accident, one <code>[[double bracket]]</code> at a time. Write one and it moves up into the bed on its own.</p>
+      <ul class="gh-l" id="ghost-list"></ul>
+    </section>
+
+    <!-- ── FOR JULIA ────────────────────────────────────────────────────── -->
+    <section class="howto" aria-labelledby="h-how">
+      <h2 id="h-how">Adding a note</h2>
+      <p>Everything above is one file. Open it on GitHub, scroll to the bottom, type four lines, commit. It is live in under a minute, from a phone, with nothing to build and no second file to update.</p>
+<pre>## The title of the note
+type: note
+tags: cyberfeminism, DIY punk
+The body. One line is enough. Link with [[Another note]].</pre>
+      <p>Only the first line is required. The file explains itself at the top, forgives a typo in a field name, and if you break it badly this page says so out loud instead of going blank.</p>
+      <a class="pill" href="https://github.com/ojuliaspinola/ojulia-world/edit/main/garden/notes.md">Edit notes.md &#8599;</a>
+      <a class="pill" href="/garden/notes.md">Read it raw &#8594;</a>
+    </section>
+
+    <section class="mid">
+      <p class="note"><b>About this page</b>[ a short paragraph about the garden goes here &#8212; Julia&#8217;s words, two or three sentences, placeholder until she writes it ]</p>
+    </section>
+
+    <footer class="foot">
+      <a class="back" href="/"><i>&#8592;</i> Back to Hello World</a>
+      <a class="back fwd" href="/portfolio/">Portfolio <i>&#8594;</i></a>
+      <a class="back fwd" href="/contact/">Contact <i>&#8594;</i></a>
+    </footer>
+
+  </div>
+
+  <div class="grit" aria-hidden="true"></div>
+</main>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="marker" x="-25%" y="-25%" width="150%" height="150%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.019" numOctaves="3" seed="7" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="8" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+</svg>
+
+<script src="/js/garden.js"></script>
+</body>
+</html>
