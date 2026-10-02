@@ -1,24 +1,28 @@
 (function(){
   "use strict";
 
-  /* ─────────────────────────────────────────────────────────────────────────
-     THE FISH.
-
-     TO ADD A FISH: drop the cut-out PNG into /assets/img/ and add one line
-     to this array. That is the whole job. Any number works — one, two, ten.
-     Lanes, speeds, sizes, depths and swim directions are all derived from
-     the array length, so nothing below needs touching.
+  /* ── THE FISH ──────────────────────────────────────────────────────────
+     Two shoals. BIG are the standalone cut-outs, SMALL came off the sheet.
+     To add one: drop the PNG in /assets/img/ and add a line to the right
+     list. facesLeft says which way the fish is drawn in its own file.
      ───────────────────────────────────────────────────────────────────── */
-  var FISH = [
-    "/assets/img/fish1.png",
-    "/assets/img/fish2.png"
+  var SHOALS = [
+    { facesLeft: true,  scale: 1,    files: [
+      "/assets/img/fish1.png", "/assets/img/fish2.png", "/assets/img/fish3.png" ] },
+    { facesLeft: false, scale: 0.42, files: [
+      "/assets/img/shoal01.png", "/assets/img/shoal02.png", "/assets/img/shoal03.png",
+      "/assets/img/shoal04.png", "/assets/img/shoal05.png", "/assets/img/shoal06.png",
+      "/assets/img/shoal07.png", "/assets/img/shoal08.png", "/assets/img/shoal09.png",
+      "/assets/img/shoal10.png", "/assets/img/shoal11.png", "/assets/img/shoal12.png",
+      "/assets/img/shoal13.png", "/assets/img/shoal14.png", "/assets/img/shoal15.png" ] }
   ];
 
-  /* Which way the cut-outs face in the PNG itself. Both fish are drawn
-     head-left, so a fish swimming left is used as-is and one swimming right
-     is mirrored. If you add a PNG that faces the other way, mirror the file
-     before dropping it in and nothing here needs changing. */
-  var ART_FACES_LEFT = true;
+  var FISH = [];
+  SHOALS.forEach(function (sh) {
+    sh.files.forEach(function (src) {
+      FISH.push({ src: src, facesLeft: sh.facesLeft, scale: sh.scale });
+    });
+  });
 
   var tank = document.getElementById('tank');
   if (!tank || !FISH.length) return;
@@ -33,20 +37,23 @@
 
   function build(){
     var narrow = narrowMQ.matches;
-    /* one shoal that scales with however many PNGs exist */
-    var n = Math.min(narrow ? 9 : 15, Math.max(narrow ? 6 : 7, FISH.length * (narrow ? 3 : 3)));
+    var n = narrow ? 14 : 26;
     var band = 100 / n;
     var frag = document.createDocumentFragment();
 
     for (var i = 0; i < n; i++){
+      var fish  = FISH[i % FISH.length];
       var depth = rnd(i, 2);                       /* 0 = far away, 1 = near */
       var rtl   = rnd(i, 4) < 0.42;                /* some swim the other way */
-      var w     = (narrow ? 56 : 92) + depth * (narrow ? 60 : 116);
+      /* the small ones vary among themselves as well as by depth */
+      var vary  = 0.74 + rnd(i, 7) * 0.52;
+      var w     = ((narrow ? 56 : 92) + depth * (narrow ? 60 : 116))
+                  * fish.scale * (fish.scale < 1 ? vary : 1);
       var dur   = (narrow ? 78 : 92) + (1 - depth) * 96 + rnd(i, 3) * 36;
       var top   = band * i + band * (0.16 + rnd(i, 1) * 0.66);
 
       var img = document.createElement('img');
-      img.src = FISH[i % FISH.length];
+      img.src = fish.src;
       img.alt = '';
       img.className = 'fish' + (rtl ? ' rtl' : '');
       img.decoding = 'async';
@@ -58,7 +65,7 @@
       s.setProperty('--delay', '-' + (rnd(i, 5) * dur).toFixed(0) + 's');
       s.setProperty('--op',    (0.12 + depth * 0.14).toFixed(2));
       s.setProperty('--blur',  ((1 - depth) * 1.6).toFixed(2) + 'px');
-      s.setProperty('--flip',  (rtl === ART_FACES_LEFT) ? '1' : '-1');
+      s.setProperty('--flip',  (rtl === fish.facesLeft) ? '1' : '-1');
       /* where each fish parks when motion is switched off */
       s.setProperty('--park',  (4 + rnd(i, 6) * 76).toFixed(1) + 'vw');
 

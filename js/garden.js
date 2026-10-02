@@ -364,10 +364,6 @@
       var d = el("div", "n-b");
       d.innerHTML = b;
       art.appendChild(d);
-    } else {
-      var e = el("p", "n-b empty");
-      e.textContent = "[ nothing written here yet — which is allowed ]";
-      art.appendChild(e);
     }
 
     var tr = tagRow(n, onTag);
@@ -405,7 +401,7 @@
     a.textContent = "Open notes.md →";
     box.appendChild(h); box.appendChild(p); box.appendChild(a);
     host.appendChild(box);
-    ["stones", "paths", "shelves", "unwritten", "sortbar"].forEach(function (id) {
+    ["paths", "shelves", "unwritten", "sortbar"].forEach(function (id) {
       var s = document.getElementById(id);
       if (s) s.hidden = true;
     });
@@ -415,60 +411,15 @@
 
   function render(g) {
     var host   = $("#bed-host");
-    var stones = $("#stone-host");
     var query  = "";
     var facet  = null;                         /* {kind:'tag'|'shelf', value} */
 
     host.innerHTML = "";
-    stones.innerHTML = "";
 
-    var beliefs = [], bed = [];
-    g.notes.forEach(function (n) { (n.type === "belief" ? beliefs : bed).push(n); });
-
-    /* the beliefs, printed big. a one-sentence note is the point, not a
-       shortfall — so the four of them get the largest type on the page. */
-    beliefs.forEach(function (n, i) {
-      var f = el("figure", "stone s" + (i % 4));
-      f.id = n.slug;
-      f.setAttribute("data-hay", hay(n));
-      var q = el("blockquote", "st-q");
-      q.setAttribute("data-t", n.title);
-      var qa = el("a");
-      qa.href = "#" + n.slug;
-      qa.textContent = n.title;
-      q.appendChild(qa);
-      f.appendChild(q);
-
-      /* No cite means she is saying it, not quoting it — which is not the
-         same thing as a missing attribution. A belief that needs a source
-         chased says so in its own flag, in her words, not in ours. */
-      if (n.cite) {
-        var cap = el("figcaption", "st-c");
-        cap.textContent = "— " + n.cite;
-        f.appendChild(cap);
-      }
-
-      if (n.flag) {
-        var fl = el("p", "n-flag");
-        fl.textContent = n.flag;
-        f.appendChild(fl);
-      }
-      if (n.body && n.body.trim()) {
-        var bd = el("div", "st-b");
-        bd.innerHTML = bodyHTML(n.body, g.resolve);
-        f.appendChild(bd);
-      }
-      var tr = tagRow(n, function (t) { setFacet("tag", t); });
-      if (tr) f.appendChild(tr);
-      stones.appendChild(f);
-    });
-
-    var cards = bed.map(function (n) {
+    var cards = g.notes.map(function (n) {
       return drawNote(n, g, function (t) { setFacet("tag", t); });
     });
     cards.forEach(function (c) { host.appendChild(c); });
-
-    $("#stones").hidden = !beliefs.length;
 
     /* ── the ghosts. a writing list she wrote by accident ──────────────── */
     var gl = $("#ghost-list"), keys = Object.keys(g.ghosts);
@@ -495,9 +446,9 @@
     $("#unwritten").hidden = !keys.length;
     $("#ghost-n").textContent = keys.length;
 
-    /* ── the paths. a tag earns a button at TAG_PATH_MIN notes ─────────── */
-    var pathHost = $("#path-host"), nearHost = $("#near-host");
-    pathHost.innerHTML = ""; nearHost.innerHTML = "";
+    /* ── the paths. a tag earns a button at TAG_PATH_MIN notes ───────── */
+    var pathHost = $("#path-host");
+    pathHost.innerHTML = "";
     var tk = Object.keys(g.tags).sort(function (a, b) {
       var d = g.tags[b].notes.length - g.tags[a].notes.length;
       return d || a.localeCompare(b);
@@ -511,17 +462,11 @@
         b.addEventListener("click", function () { setFacet("tag", k); });
         pathHost.appendChild(b);
         paths++;
-      } else {
-        var s = el("span", "seed");
-        s.innerHTML = esc(t.label) + "<i>" + c + "/" + TAG_PATH_MIN + "</i>";
-        nearHost.appendChild(s);
-        nears++;
-      }
+      } else { nears++; }
     });
-    $("#near-wrap").hidden = !nears;
-    $("#paths").hidden = !(paths || nears);
+    $("#paths").hidden = !paths;
 
-    /* ── the shelves. her nine kinds, counted, empty ones greyed ───────── */
+    /* ── the shelves ─────────────────────────────────────────────────── */
     var shelfHost = $("#shelf-host");
     shelfHost.innerHTML = "";
     var tally = {};
@@ -549,10 +494,10 @@
       wander: null
     };
     var byNote = {};
-    bed.forEach(function (n, i) { byNote[n.slug] = cards[i]; });
+    g.notes.forEach(function (n, i) { byNote[n.slug] = cards[i]; });
 
     function arrange(mode) {
-      var list = bed.slice();
+      var list = g.notes.slice();
       if (mode === "wander") {
         for (var i = list.length - 1; i > 0; i--) {
           var j = Math.floor(Math.random() * (i + 1)), t = list[i];
@@ -600,10 +545,9 @@
         var ok = matches(n);
         n.hidden = !ok;
         if (ok && n.classList.contains("n")) shown++;
-        if (ok && n.classList.contains("stone")) shown++;
       });
       /* a section with nothing left in it steps out of the way */
-      [["stones", "#stone-host .stone"], ["unwritten", "#ghost-list .gh-i"]].forEach(function (p) {
+      [["unwritten", "#ghost-list .gh-i"]].forEach(function (p) {
         var sec = document.getElementById(p[0]);
         if (!sec) return;
         var any = Array.prototype.slice.call(document.querySelectorAll(p[1]))
@@ -621,7 +565,7 @@
 
     function say(shown) {
       if (shown == null) {
-        shown = Array.prototype.slice.call(document.querySelectorAll("#bed-host .n, #stone-host .stone"))
+        shown = Array.prototype.slice.call(document.querySelectorAll("#bed-host .n"))
                   .filter(function (n) { return !n.hidden; }).length;
       }
       var total = g.notes.length;
@@ -699,9 +643,7 @@
 
   /* ── FETCH. every branch out of here has to leave something on screen ── */
   if (!window.fetch) {
-    trouble("This browser cannot read the garden file.",
-            "The garden is one markdown file and this browser cannot fetch it. " +
-            "The file itself is plain text and reads perfectly well on its own.");
+    trouble("This browser cannot read the garden file.", "");
     return;
   }
 
@@ -713,31 +655,21 @@
     try {
       notes = parse(text);
     } catch (err) {
-      trouble("The garden file could not be read.",
-              "Something in notes.md stopped the page reading it: " + err.message +
-              " The file itself is fine and still readable — open it below.");
+      trouble("The garden file could not be read.", err.message);
       return;
     }
     if (!notes.length) {
-      trouble("No notes in the file yet.",
-              "notes.md loaded" + (text.trim() ? "" : " and is empty") +
-              ", but nothing in it starts with ## — which is how a note begins. " +
-              "Add a line starting with ## and the garden grows.");
+      trouble("No notes yet.", "Nothing in notes.md starts with ##.");
       return;
     }
     try {
       render(build(notes));
       document.documentElement.classList.add("grown");
     } catch (err) {
-      trouble("The garden loaded but would not draw.",
-              (err && err.message ? err.message + " " : "") +
-              "The notes are all still in the file, unharmed.");
+      trouble("The garden loaded but would not draw.", (err && err.message) || "");
       if (window.console) console.warn(err);
     }
   }).catch(function (err) {
-    trouble("The garden file did not load.",
-            (err && err.message ? err.message + ". " : "") +
-            "Everything in the garden lives in one plain-text file, so it is " +
-            "still readable directly — nothing is lost.");
+    trouble("The garden file did not load.", (err && err.message) || "");
   });
 })();
