@@ -102,7 +102,17 @@ a.stn .dest{color:var(--teal)}
 a.stn:hover .nm::before,a.stn:focus-visible .nm::before{opacity:.85;transform:translate(3px,2px) scaleX(1)}
 a.stn:hover .ico,a.stn:focus-visible .ico{transform:translateY(1px) rotate(-8deg);color:var(--coral)}
 a.stn:hover .arw,a.stn:focus-visible .arw{transform:translate(3px,-3px)}
-a.stn:focus-visible{outline:2.5px var(--focus-ring);outline-offset:6px}
+a.stn:focus-visible,button.stn:focus-visible{outline:2.5px var(--focus-ring);outline-offset:6px}
+
+/* the two addresses copy themselves — they are buttons wearing a link's clothes */
+button.stn{appearance:none;background:none;border:0;padding:0;margin:0;width:100%;
+  font:inherit;text-align:left;cursor:pointer;color:var(--ink)}
+button.stn .dest{color:var(--teal)}
+button.stn:hover .nm::before,button.stn:focus-visible .nm::before{opacity:.85;transform:translate(3px,2px) scaleX(1)}
+button.stn:hover .ico,button.stn:focus-visible .ico{transform:translateY(1px) rotate(-8deg);color:var(--coral)}
+.said{font-style:normal;margin-left:.9em;color:var(--coral);opacity:0;
+  transform:translateY(2px);transition:opacity .14s ease,transform .18s ease}
+.copied .said{opacity:1;transform:translateY(0)}
 
 
 /* ── BOTTOM ──────────────────────────────────────────────────────────────── */

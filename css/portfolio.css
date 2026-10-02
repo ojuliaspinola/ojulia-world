@@ -96,9 +96,6 @@ a.it:focus-visible{outline:2.5px var(--focus-ring);outline-offset:4px}
 .note-only{color:var(--grey);opacity:.8;pointer-events:none}
 .sub-out:focus-visible{outline:2px var(--focus-ring);outline-offset:3px}
 
-.grows{margin:14px 0 0;padding:9px 10px;border:1.5px dashed rgba(20,24,27,.35);
-  font-family:var(--micro);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey)}
-
 /* ── THE SCATTER. photographic cut-outs, unaligned, printed ──────────────── */
 .scatter{position:relative;height:250px;margin:52px 0 0;pointer-events:none}
 .obj{position:absolute;left:var(--x);top:var(--y);width:var(--w);
@@ -117,11 +114,7 @@ a.it:focus-visible{outline:2.5px var(--focus-ring);outline-offset:4px}
 #o-art      {--x:52%;--y:76%;--w:104px;--r:-3deg}
 
 /* ── BOTTOM LEFT ─────────────────────────────────────────────────────────── */
-.foot{margin:64px 0 0;max-width:290px}
-.foot .col-h{padding-right:0}
-.foot ul{list-style:none;margin:14px 0 0;padding:0}
-.foot .it{grid-template-columns:13px minmax(0,1fr) auto}
-.foot .back{margin-top:26px;display:inline-block}
+.foot{margin:64px 0 0;display:flex;flex-wrap:wrap;gap:10px 26px}
 
 /* ── WIDER ROOMS ─────────────────────────────────────────────────────────── */
 @media (min-width:720px){
@@ -130,7 +123,7 @@ a.it:focus-visible{outline:2.5px var(--focus-ring);outline-offset:4px}
   .dots{opacity:.7;-webkit-mask-size:440px 230px;mask-size:440px 230px;
     -webkit-mask-position:68% 88%;mask-position:68% 88%}
   .wrap{padding:36px clamp(28px,5vw,74px) 88px}
-  .cols{grid-template-columns:1.22fr 1fr .92fr;gap:clamp(30px,4.6vw,66px);margin-top:64px}
+  .cols{grid-template-columns:1.3fr 1fr;gap:clamp(34px,5vw,74px);margin-top:64px;max-width:860px}
   .col-h{font-size:16px}
   .it .nm{font-size:13.5px}
   .scatter{height:340px;margin-top:-150px}

@@ -45,10 +45,6 @@
 .scrawl.d{display:none}
 
 /* ── ONE LINE FROM JULIA ─────────────────────────────────────────────────── */
-.say{position:absolute;z-index:9;left:4%;top:25.5%;width:54%;margin:0;background:var(--pink);
-  mix-blend-mode:multiply;transform:rotate(-1.5deg);padding:.85em .9em 1em;border:2.5px solid var(--ink);
-  font-size:11px;line-height:1.4;letter-spacing:.02em;font-weight:700;text-transform:uppercase}
-.say b{display:block;font-family:var(--micro);font-weight:400;font-size:8px;letter-spacing:.1em;opacity:.9;margin-bottom:.5em}
 
 /* ── BODIES ──────────────────────────────────────────────────────────────── */
 .bodies{position:absolute;inset:0;z-index:10;margin:0;padding:0;list-style:none}
@@ -85,11 +81,11 @@
   background-image:radial-gradient(var(--teal) 24%,transparent 26%),radial-gradient(var(--coral) 30%,transparent 32%);
   background-size:15px 15px,15px 15px;background-position:0 0,6px 7px;background-blend-mode:multiply,multiply;
   box-shadow:inset 0 0 0 5px var(--ink)}
-.moon{position:absolute;width:16%;height:16%;border-radius:50%;overflow:hidden;
+.moon{position:absolute;width:27%;height:27%;border-radius:50%;overflow:hidden;
   box-shadow:inset 0 0 0 4px var(--ink);animation:drift 7s ease-in-out infinite alternate;z-index:2}
 .moon img{width:100%;height:100%;object-fit:cover;filter:contrast(1.1) saturate(1.2)}
-.moon.m1{left:26%;top:37%}
-.moon.m2{left:50%;top:57%;width:12%;height:12%;animation-duration:9s;animation-delay:-3s}
+.moon.m1{left:20%;top:30%}
+.moon.m2{left:52%;top:54%;width:21%;height:21%;animation-duration:9s;animation-delay:-3s}
 @keyframes drift{from{transform:translate(0,0)}to{transform:translate(7px,-9px)}}
 .m-photo{overflow:hidden;box-shadow:inset 0 0 0 6px var(--ink)}
 .m-photo::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:inset 0 0 0 6px var(--ink)}
@@ -120,7 +116,7 @@
 #b-about     {--x:22%;--y:47%;--s:calc(30*var(--u));  --lx:70%;--ly:-20%;--lr:-6deg; --nx:99%;--ny:10%}
 #b-contact   {--x:50%;--y:44%;--s:calc(19*var(--u));  --lx:50%;--ly:106%;--lr:4deg;--lf:calc(4.4*var(--u)); --nx:6%;--ny:-30%}
 #b-garden    {--x:21%;--y:64%;--s:calc(31*var(--u));  --lx:60%;--ly:101%;--lr:-4deg;--nx:2%;--ny:-14%}
-#b-portfolio {--x:79%;--y:88%;--s:calc(80*var(--u));  --lx:38%;--ly:14%;--lr:-4deg;--lf:calc(9.4*var(--u));  --nx:20%;--ny:6%}
+#b-portfolio {--x:79%;--y:88%;--s:calc(40*var(--u));  --lx:-6%;--ly:88%;--lr:-4deg;--lf:calc(6.2*var(--u));  --nx:50%;--ny:-16%}
 #g-sub {--x:76%;--y:60%;--s:calc(42*var(--u));--gr:-13deg}
 #g-bts {--x:18%;--y:90%;--s:calc(35*var(--u));--gr:187deg}
 
@@ -132,7 +128,6 @@
   .nm{font-size:8.2vw;line-height:.96}
   .sub{left:3.2%;top:38.5%;font-size:10px}
   .figure{left:27%;top:5%;width:26vw}
-  .say{left:3.2%;top:42.5%;width:26%;font-size:12px}
   .scrawl.m,.riso.m{display:none}.scrawl.d,.riso.d{display:block}
   .lab{--lf:2.7vmin}
   .gone .tag{--gf:2.5vmin}
@@ -141,7 +136,7 @@
   #b-contact   {--x:58%;--y:42%;--s:11vmin; --lx:60%;--ly:107%;--lr:4deg;--lf:2.3vmin;--nx:2%;--ny:-32%}
   #b-about     {--x:45%;--y:72%;--s:21vmin; --lx:56%;--ly:101%;--lr:-6deg; --nx:10%;--ny:-17%}
   #b-garden    {--x:24%;--y:69%;--s:22vmin; --lx:50%;--ly:102%;--lr:-4deg;--nx:2%;--ny:-15%}
-  #b-portfolio {--x:87%;--y:73%;--s:60vmin; --lx:41%;--ly:19%;--lr:-4deg;--lf:9vmin;--nx:24%;--ny:9%}
+  #b-portfolio {--x:80%;--y:76%;--s:30vmin; --lx:-10%;--ly:90%;--lr:-4deg;--lf:5.4vmin;--nx:50%;--ny:-18%}
   #g-sub {--x:72%;--y:33%;--s:18vmin;--gr:-13deg}
   #g-bts {--x:10%;--y:94%;--s:24vmin;--gr:187deg}
 }
