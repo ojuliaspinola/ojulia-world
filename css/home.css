@@ -57,6 +57,9 @@
   will-change:transform}
 .body>a{display:block;position:absolute;inset:0;text-decoration:none;color:var(--ink);outline:none;
   -webkit-tap-highlight-color:transparent}
+/* invisible hit pad — the small planets were a dartboard without it.
+   Grows with the planet but never smaller than a fingertip. */
+.body>a::after{content:"";position:absolute;inset:calc(-1 * max(18px, 9%));border-radius:50%}
 .disc{position:absolute;inset:0;border-radius:50%;transition:transform .2s cubic-bezier(.34,1.8,.5,1)}
 .body>a:hover .disc,.body>a:focus-visible .disc{transform:scale(1.07) rotate(7deg)}
 .lab{position:absolute;left:var(--lx,50%);top:var(--ly,100%);
