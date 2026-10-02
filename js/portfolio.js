@@ -14,6 +14,12 @@
     "/assets/img/fish2.png"
   ];
 
+  /* Which way the cut-outs face in the PNG itself. Both fish are drawn
+     head-left, so a fish swimming left is used as-is and one swimming right
+     is mirrored. If you add a PNG that faces the other way, mirror the file
+     before dropping it in and nothing here needs changing. */
+  var ART_FACES_LEFT = true;
+
   var tank = document.getElementById('tank');
   if (!tank || !FISH.length) return;
 
@@ -52,7 +58,7 @@
       s.setProperty('--delay', '-' + (rnd(i, 5) * dur).toFixed(0) + 's');
       s.setProperty('--op',    (0.12 + depth * 0.14).toFixed(2));
       s.setProperty('--blur',  ((1 - depth) * 1.6).toFixed(2) + 'px');
-      s.setProperty('--flip',  rtl ? '-1' : '1');
+      s.setProperty('--flip',  (rtl === ART_FACES_LEFT) ? '1' : '-1');
       /* where each fish parks when motion is switched off */
       s.setProperty('--park',  (4 + rnd(i, 6) * 76).toFixed(1) + 'vw');
 
