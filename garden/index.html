@@ -8,16 +8,11 @@
 <link rel="stylesheet" href="/css/base.css">
 <link rel="stylesheet" href="/css/garden.css">
 <script>
-/* Marks the document as scriptable so the controls below — which only do
-   anything once notes.md has been read — are not shown to someone who
-   cannot use them. And if garden.js itself never arrives, say so rather
-   than leave "Reading notes.md..." on the screen for ever. */
 document.documentElement.className += " js";
 setTimeout(function () {
   var d = document.documentElement, b = document.querySelector(".boot");
   if (d.className.indexOf("grown") > -1 || document.querySelector(".trouble") || !b) return;
-  b.innerHTML = "The garden did not load. Everything in it lives in one plain-text " +
-    "file, so nothing is lost \u2014 <a href=\"/garden/notes.md\">read notes.md</a>.";
+  b.innerHTML = "<a href=\"/garden/notes.md\">Read notes.md</a>";
   b.className = "boot late";
 }, 9000);
 </script>
@@ -52,24 +47,12 @@ setTimeout(function () {
 
     <header class="top">
       <a class="back" href="/"><i>&#8592;</i> Hello World</a>
-      <p class="meta"><em>02</em> The garden</p>
     </header>
 
     <h1 class="title" data-t="Digital Garden">Digital Garden</h1>
-    <p class="lede">Nothing here is finished &#183; nothing here is sorted by date &#183; <b>an unwritten note is still a note</b></p>
 
-    <!-- ── WITH JAVASCRIPT OFF ────────────────────────────────────────────
-         The page is one markdown file read in the browser, so with JS off
-         there is nothing to render. Rather than fake it, we send people to
-         the file, which is the whole garden in plain text and reads fine.  -->
     <noscript>
-      <section class="js-off">
-        <h2>The garden is one file</h2>
-        <p>This page reads <code>garden/notes.md</code> in your browser and draws it &#8212; the links, the backlinks, the unwritten notes. With JavaScript switched off there is nothing to draw it with.</p>
-        <p>That file is not a database. It is plain text, written to be read by a person, and it is the entire garden with nothing left out. Open it and you have everything this page would have shown you.</p>
-        <a class="pill" href="/garden/notes.md">Read notes.md &#8594;</a>
-        <a class="pill" href="https://github.com/ojuliaspinola/ojulia-world/blob/main/garden/notes.md">On GitHub &#8599;</a>
-      </section>
+      <p class="js-off"><a class="pill" href="/garden/notes.md">Read notes.md &#8594;</a></p>
     </noscript>
 
     <!-- ── THE BAR ──────────────────────────────────────────────────────── -->
@@ -84,7 +67,7 @@ setTimeout(function () {
 
       <div class="rows">
         <div class="row" id="sort-host">
-          <p class="rl">Arrangement &#8212; never by date</p>
+          <p class="rl">Arrangement</p>
           <button type="button" class="chip" data-o="az" aria-pressed="true"><span>A&#8211;Z</span></button>
           <button type="button" class="chip" data-o="kind" aria-pressed="false"><span>By kind</span></button>
           <button type="button" class="chip" data-o="roots" aria-pressed="false"><span>By roots</span></button>
@@ -92,29 +75,20 @@ setTimeout(function () {
         </div>
 
         <div class="row" id="paths" hidden>
-          <h2 class="rl">Paths &#8212; a tag becomes one at three notes</h2>
+          <h2 class="rl">Paths</h2>
           <span id="path-host" style="display:contents"></span>
-          <span id="near-wrap" class="tiny" hidden>Not paths yet: <span id="near-host"></span></span>
-        </div>
+          </div>
 
         <div class="row" id="shelves">
-          <h2 class="rl">Shelves &#8212; where a source came from</h2>
+          <h2 class="rl">Shelves</h2>
           <span id="shelf-host" style="display:contents"></span>
         </div>
       </div>
     </div>
 
-    <!-- ── THE STONES ───────────────────────────────────────────────────── -->
-    <section class="stones" id="stones" aria-labelledby="h-stones" hidden>
-      <h2 class="sec-h" id="h-stones">Beliefs</h2>
-      <p class="sec-note">Four things she keeps saying. A note that is one sentence and an attribution is a whole note &#8212; so these are the biggest type on the page.</p>
-      <div class="stone-g" id="stone-host"></div>
-    </section>
-
     <!-- ── THE BED ──────────────────────────────────────────────────────── -->
     <section class="bed" aria-labelledby="h-bed">
       <h2 class="sec-h" id="h-bed">The bed <i>(<span id="count">&#8212;</span> notes &#183; <span id="link-n">&#8212;</span> links)</i></h2>
-      <p class="sec-note">Everything else, growing at its own speed. <b>Roots</b> under a note are the notes that point at it, worked out on the fly &#8212; nobody maintains them.</p>
 
       <div id="bed-host">
         <p class="boot">Reading garden/notes.md&#8230;</p>
@@ -122,32 +96,13 @@ setTimeout(function () {
 
       <div id="nothing" hidden>
         <b>Nothing matches that</b>
-        <span>The garden is small on purpose. Clear the search and have a wander instead &#8212; or write the note you were looking for.</span>
       </div>
     </section>
 
     <!-- ── THE UNWRITTEN ────────────────────────────────────────────────── -->
     <section class="unwritten" id="unwritten" aria-labelledby="h-un" hidden>
       <h2 class="sec-h" id="h-un">Unwritten <i>(<span id="ghost-n">0</span>)</i></h2>
-      <p class="sec-note">Notes that other notes already link to, but which nobody has written. They are not broken links, they are a writing list Julia wrote by accident, one <code>[[double bracket]]</code> at a time. Write one and it moves up into the bed on its own.</p>
       <ul class="gh-l" id="ghost-list"></ul>
-    </section>
-
-    <!-- ── FOR JULIA ────────────────────────────────────────────────────── -->
-    <section class="howto" aria-labelledby="h-how">
-      <h2 id="h-how">Adding a note</h2>
-      <p>Everything above is one file. Open it on GitHub, scroll to the bottom, type four lines, commit. It is live in under a minute, from a phone, with nothing to build and no second file to update.</p>
-<pre>## The title of the note
-type: note
-tags: cyberfeminism, DIY punk
-The body. One line is enough. Link with [[Another note]].</pre>
-      <p>Only the first line is required. The file explains itself at the top, forgives a typo in a field name, and if you break it badly this page says so out loud instead of going blank.</p>
-      <a class="pill" href="https://github.com/ojuliaspinola/ojulia-world/edit/main/garden/notes.md">Edit notes.md &#8599;</a>
-      <a class="pill" href="/garden/notes.md">Read it raw &#8594;</a>
-    </section>
-
-    <section class="mid">
-      <p class="note"><b>About this page</b>[ a short paragraph about the garden goes here &#8212; Julia&#8217;s words, two or three sentences, placeholder until she writes it ]</p>
     </section>
 
     <footer class="foot">

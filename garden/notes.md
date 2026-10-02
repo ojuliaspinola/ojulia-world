@@ -1,50 +1,21 @@
-**THIS FILE IS THE GARDEN.**
-Everything at ojulia.space/garden is grown from this one file. Edit it, commit,
-and it is live in under a minute. There is nothing to build. You can do the
-whole thing in this editor, on your phone.
-
-**To plant a note, go to the bottom and type four lines:**
+Everything at ojulia.space/garden comes from this file.
 
 ```
-## The title of the note
+## Title
 type: note
 tags: cyberfeminism, DIY punk
-The body. One line is enough. Link to another note with [[The title of the note]].
+The body. Link to another note with [[Title]].
 ```
 
-**Only the first line is required.** A note with nothing but a title is a legal
-note — it shows up as unwritten, which is honest, and it is a note to yourself
-to come back. Nothing about this garden is final.
+Only the first line is required.
 
-**The rules, all of them:**
-
-- A line starting with `##` starts a new note. That is the only separator.
-  There is nothing else to remember and nothing to close. `#` or `###` work
-  too, and so does `##Title` with the space missed off.
-- `type:` is one of `belief` `note` `source` `scrap` `collection`. Leave it out
-  and it is a `note`.
-- `tags:` is anything you like, separated by commas. A tag becomes a path
-  through the garden once **three** notes share it. Below three it still shows
-  on the note, it just does not get a button yet. The page shows you which tags
-  are close.
-- `source:` is for `type: source` — one of Books · Games · Online · Music ·
-  Essays · Videos · Movies · TV · People.
-- `cite:` is who said it, when a note quotes someone.
-- `flag:` is a note to yourself that shows up on the page in a dashed box —
-  use it for *check this*, *wrong attribution*, *find the link*.
-- `[[Double brackets]]` link to another note by its title. Capitals do not
-  matter. If nothing has that title yet, it becomes a **ghost** — it appears in
-  the Unwritten list at the bottom of the page, which is a list of things you
-  have already decided to write.
-- **There is no date field. On purpose.** Dates are metadata, not the sorting
-  function. Nothing here is sorted by when you wrote it.
-
-**If you typo a field name it still works** — `tsgs:` is read as `tags:`. If you
-typo it badly, the line simply shows up in the body of the note, which is how
-you will spot it. Nothing you can type in here will break the page.
-
-**Order does not matter.** New notes at the bottom is easiest, but the page does
-not read this file top to bottom, so put them anywhere.
+- `##` starts a note.
+- `type:` belief · note · source · scrap · collection. Default: note.
+- `tags:` comma separated. Three notes sharing one makes it a path.
+- `source:` Books · Games · Online · Music · Essays · Videos · Movies · TV · People
+- `cite:` who said it. `flag:` a note to yourself, shown in a dashed box.
+- `[[Double brackets]]` link by title. No match yet = it shows under Unwritten.
+- No date field. Order does not matter.
 
 ---
 
