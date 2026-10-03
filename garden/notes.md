@@ -10,7 +10,7 @@ The body. Link to another note with [[Title]].
 Only the first line is required.
 
 - `##` starts a note.
-- `type:` belief · note · source · scrap · collection. Default: note.
+- `type:` note · source · idea · collection · concept. Default: note.
 - `tags:` comma separated. Three notes sharing one makes it a path.
 - `source:` Books · Games · Online · Music · Essays · Videos · Movies · TV · People
 - `cite:` who said it. `flag:` a note to yourself, shown in a dashed box.
@@ -20,114 +20,45 @@ Only the first line is required.
 ---
 
 ## LOVE IS THE RUNNING TOWARDS
-type: belief
-tags: cyberfeminism, courage
-[ Julia — where this came from and what it means to you. Two or three lines. ]
+type: source
+tags: love
+cite: https://www.dandad.org/work/d-ad-awards-archive/the-running-towards
+This is written above the London Fire Brigade in Shoreditch. When I saw it for the first time it had a strong impact on me. This is a great example of the power of words in framing the work we do. 
 
-## you girls are just thinking about yourself too much
-type: belief
+## "you guys might be thinking about yourselves too much"
+type: source
 cite: Jemima Kirke
-tags: courage
-flag: Julia — check the wording. The widely-circulated version is "I think you guys are thinking about yourselves too much". You gave me this phrasing. Which one do you want on the page?
-[ Julia — you said this one gets quoted cheekily. Say why here. ]
+tags: identity
+Some of us do think about ourselves too much, I've been guilty of it. Pour yourself into anything else and find more peace than you could ever find ruminating on you.
 
 ## In this moment you are a catalyst for change
-type: belief
-tags: pro-social games
-[ Julia — your words. What this changes about how you make things. ]
+type: idea
+tags: identity
+Let go of self-limiting beliefs. Your actions are portals into new realities. Be the change you want to see... etc.
 
 ## The Long Hard Stupid Way
-type: belief
-tags: DIY punk
-flag: ATTRIBUTION NEEDED. Nobody has confirmed where this comes from, so nobody is credited. Do not let anyone add a name here until it is checked.
-[ Julia — your words. Leave the flag above until the source is confirmed. ]
+type: source
+cite: https://frankchimero.com/blog/2011/the-long-hard-stupid-way/
+tags: process
+Rushing/skipping the process won't get you the same results. You must live the journey to get what you want.
 
 ## Cyberfeminism
-type: note
+type: concept
 tags: cyberfeminism
-[ Julia — what cyberfeminism means to you, in your words, not a definition off the internet. ]
-This is the hub. Everything cyberfeminist links back here.
-Still to write: [[Xenofeminism]] and [[Riot grrrl zines & photocopiers]].
+The biggest area of my research right now. Here I will add more of my sources...
+[[12 Bytes: How artificial intelligence will change the way we live and love]]
 
 ## Pro-social games
-type: note
-tags: pro-social games, game design
-[ Julia — the short version of what a pro-social game is and why it is the thing you care about. ]
-Related: [[Cyberfeminism]], [[What makes a game pro-social?]], [[Play as infrastructure]].
-
-## DIY punk
-type: note
-tags: DIY punk
-[ Julia — what DIY punk taught you that games did not. ]
-See also [[Riot grrrl zines & photocopiers]].
-
-## What makes a game pro-social?
-type: note
-tags: pro-social games, game design
-[ Julia — the working answer. It is allowed to change. ]
-
-## A cozy game about DJing for salamanders underwater
-type: note
-tags: pro-social games
-cite: Julia Spinola, Pure of Heart
-[ Julia — this is how you describe Sleep Swimmer on the newsletter. Say the rest of it here. ]
-Links to [[Pro-social games]].
-
-## the internet should be fun
-type: source
-source: Online
-cite: Julia Spinola, Pure of Heart
-tags: DIY punk
-[ Julia — a link to the post and the one line from it you would keep. ]
-
-## Go quietly public on the internet
-type: source
-source: Essays
-cite: Carolyn Yoo, SEE YOU
-tags: digital gardens
-[ Julia — the bit you underlined. ]
-"To go quietly public online, you must first inhabit your world."
-Connects to [[The gap between reaction and response]] and [[Intro to digital gardening]].
+type: concept
+tags: game design
+Games that encourage people to help and be good to others. 
+[[Cyberfeminism]]
 
 ## Intro to digital gardening
 type: source
-source: Online
-cite: Carolyn Yoo, SEE YOU
+cite: [Carolyn Yoo, SEE YOU](https://cyoo.substack.com/p/intro-to-digital-gardening-a-quietly)
 tags: digital gardens
-[ Julia — this is the piece this whole page is built on. What you took from it. ]
-"Your personal encyclopedia, your commonplace notebook, your moodboards and post-it notes combined."
-
-## The gap between reaction and response
-type: note
-cite: Carolyn Yoo
-tags: digital gardens
-[ Julia — the gap is where opinions get formed in public. Yours goes here. ]
-
-## A game I keep going back to
-type: source
-source: Games
-tags: pro-social games
-[ Julia — which game, and what it does to a room full of people. ]
-
-## The record I put on to start work
-type: source
-source: Music
-tags: DIY punk
-[ Julia — which record. One line is enough. ]
-
-## Overheard, and I have been thinking about it since
-type: scrap
-tags: DIY punk
-[ a fragment. no context needed. scraps are allowed to be a single line. ]
-
-## Where cyberfeminism shows up in games
-type: collection
-tags: cyberfeminism, pro-social games
-[ Julia — a running list. Add a line whenever you find one. ]
-[[Cyberfeminism]]
-[[Pro-social games]]
-[[Xenofeminism]]
-[[Play as infrastructure]]
-[[The long walk home from a gig]]
+"To go quietly public online, you must first inhabit your world."
+I had started to create a digital garden of my own privately, but this article by Carolyn Yoo is what convinced me to put it public. This other piece by her as well: https://cyoo.substack.com/p/quietly-public-on-the-internet 
 
 ## Compost
