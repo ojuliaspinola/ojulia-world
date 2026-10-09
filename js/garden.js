@@ -22,9 +22,9 @@
   var SRC          = "/garden/notes.md";
   var TAG_PATH_MIN = 3;
 
-  var TYPES  = ["belief", "note", "source", "scrap", "collection"];
-  var KINDS  = ["Books", "Games", "Online", "Music", "Essays",
-                "Videos", "Movies", "TV", "People"];
+  var TYPES  = ["note", "source", "idea", "concept", "collection"];
+  var KINDS  = ["World", "Online", "Books", "Essays", "People",
+                "Games", "Music", "Videos", "Movies", "TV"];
 
   /* field names she might plausibly type, mapped to the five real ones */
   var ALIAS = {
@@ -224,6 +224,19 @@
     return s.replace(/\u0000(\d+)\u0000/g, function (_, i) { return tok[+i]; });
   }
 
+  /* A cite is a person, a markdown link, or a bare URL. A bare URL shows as
+     its domain — the whole address in 8px caps is unreadable. */
+  function citeHTML(raw) {
+    var t = String(raw).trim();
+    var bare = t.match(/^(https?:\/\/[^\s]+)$/);
+    if (bare) {
+      var host = t.replace(/^https?:\/\//, "").replace(/^www\./, "").split("/")[0];
+      return '<a class="ex" href="' + esc(t) + '">' + esc(host) +
+             '<i aria-hidden="true">\u2197</i></a>';
+    }
+    return inline(t, function () { return { found: false, slug: "" }; });
+  }
+
   function bodyHTML(raw, resolve) {
     if (!raw || !raw.trim()) return "";
     var out = "", fence = null, buf = [];
@@ -322,7 +335,7 @@
     if (n.typeRaw && !known) bits.push('<i class="odd">' + esc(n.typeRaw) + "</i>");
     if (n.source)            bits.push('<i class="k">' + esc(n.source) + "</i>");
     else if (n.sourceRaw)    bits.push('<i class="k odd">' + esc(n.sourceRaw) + "</i>");
-    if (n.cite)              bits.push('<span class="cite">\u2014 ' + esc(n.cite) + "</span>");
+    if (n.cite)              bits.push('<span class="cite">\u2014 ' + citeHTML(n.cite) + "</span>");
     wrap.innerHTML = bits.join("");
     return wrap;
   }
@@ -480,48 +493,16 @@
       shelfHost.appendChild(b);
     });
 
-    /* ── ARRANGEMENT. never by date. the reader picks the walk. ────────── */
-    var order = {
-      az:    function (a, b) { return a.title.toLowerCase().localeCompare(b.title.toLowerCase()); },
-      kind:  function (a, b) {
-               var d = TYPES.indexOf(a.type) - TYPES.indexOf(b.type);
-               return d || order.az(a, b);
-             },
-      roots: function (a, b) {
-               var d = (b.backlinks.length + b.out.length) - (a.backlinks.length + a.out.length);
-               return d || order.az(a, b);
-             },
-      wander: null
-    };
+    /* Alphabetical. The notes have no order of their own and a date order
+       would be a lie about how a garden grows. */
     var byNote = {};
     g.notes.forEach(function (n, i) { byNote[n.slug] = cards[i]; });
 
-    function arrange(mode) {
-      var list = g.notes.slice();
-      if (mode === "wander") {
-        for (var i = list.length - 1; i > 0; i--) {
-          var j = Math.floor(Math.random() * (i + 1)), t = list[i];
-          list[i] = list[j]; list[j] = t;
-        }
-      } else {
-        list.sort(order[mode] || order.az);
-      }
-      var frag = document.createDocumentFragment();
-      list.forEach(function (n) { frag.appendChild(byNote[n.slug]); });
-      host.appendChild(frag);
-    }
-
-    var mode = "az";
-    var sortBtns = Array.prototype.slice.call(document.querySelectorAll("#sort-host .chip"));
-    sortBtns.forEach(function (b) {
-      b.addEventListener("click", function () {
-        mode = b.getAttribute("data-o");
-        sortBtns.forEach(function (o) { o.setAttribute("aria-pressed", o === b ? "true" : "false"); });
-        arrange(mode);
-        say();
-      });
-    });
-    arrange(mode);
+    var frag = document.createDocumentFragment();
+    g.notes.slice()
+      .sort(function (a, b) { return a.title.toLowerCase().localeCompare(b.title.toLowerCase()); })
+      .forEach(function (n) { frag.appendChild(byNote[n.slug]); });
+    host.appendChild(frag);
 
     /* ── FILTERING. search plus at most one facet ──────────────────────── */
     var input   = $("#q");
