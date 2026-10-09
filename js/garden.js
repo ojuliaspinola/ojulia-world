@@ -504,6 +504,157 @@
       .forEach(function (n) { frag.appendChild(byNote[n.slug]); });
     host.appendChild(frag);
 
+
+    /* ── THE WEB. the whole garden at once, the current note lit ────────
+       Edges are a [[link]] she wrote (solid) or a tag two notes share
+       (dotted). With 17 notes and 3 links, the tags are what hold it
+       together, so they have to be drawn. */
+    var web = (function () {
+      var host = $("#web"), svg = $("#web-svg");
+      if (!host || !svg || !g.notes.length) return { light: function () {}, filter: function () {} };
+
+      var edges = [];
+      g.notes.forEach(function (a) {
+        a.out.forEach(function (b) {               /* out holds notes, not slugs */
+          if (b && b !== a) edges.push({ a: a, b: b, kind: "link" });
+        });
+      });
+      for (var i = 0; i < g.notes.length; i++) {
+        for (var j = i + 1; j < g.notes.length; j++) {
+          var shared = g.notes[i].tags.filter(function (t) {
+            return g.notes[j].tags.indexOf(t) > -1;
+          });
+          if (shared.length) edges.push({ a: g.notes[i], b: g.notes[j], kind: "tag" });
+        }
+      }
+
+      /* a few hundred rounds of spring and shove, run once */
+      var W = 520, H = 760, P = {};
+      g.notes.forEach(function (n, k) {
+        var ang = (k / g.notes.length) * Math.PI * 2;
+        P[n.slug] = { x: W / 2 + Math.cos(ang) * 190, y: H / 2 + Math.sin(ang) * 275 };
+      });
+      for (var pass = 0; pass < 240; pass++) {
+        edges.forEach(function (e) {
+          var p = P[e.a.slug], q = P[e.b.slug];
+          var dx = q.x - p.x, dy = q.y - p.y, d = Math.sqrt(dx * dx + dy * dy) || 1;
+          var want = e.kind === "link" ? 108 : 205, f = (d - want) * 0.012;
+          p.x += dx / d * f; p.y += dy / d * f; q.x -= dx / d * f; q.y -= dy / d * f;
+        });
+        g.notes.forEach(function (a) {
+          g.notes.forEach(function (b) {
+            if (a === b) return;
+            var p = P[a.slug], q = P[b.slug];
+            var dx = q.x - p.x, dy = q.y - p.y, d = Math.sqrt(dx * dx + dy * dy) || 1;
+            if (d < 112) { var f = (112 - d) * 0.055; p.x -= dx / d * f; p.y -= dy / d * f; }
+          });
+          var p = P[a.slug];
+          p.x += (W / 2 - p.x) * 0.0028;
+          p.y += (H / 2 - p.y) * 0.0028;
+          p.x = Math.max(62, Math.min(W - 62, p.x));
+          p.y = Math.max(46, Math.min(H - 46, p.y));
+        });
+      }
+
+      /* whatever shape it settled into, stretch it to fill the frame */
+      (function () {
+        var xs = [], ys = [];
+        g.notes.forEach(function (n) { xs.push(P[n.slug].x); ys.push(P[n.slug].y); });
+        var x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs);
+        var y0 = Math.min.apply(null, ys), y1 = Math.max.apply(null, ys);
+        var padX = 64, padY = 54;
+        var sx = (x1 - x0) > 1 ? (W - padX * 2) / (x1 - x0) : 1;
+        var sy = (y1 - y0) > 1 ? (H - padY * 2) / (y1 - y0) : 1;
+        /* a force graph has no true aspect, so it may stretch a little to
+           fill a tall frame — but only a little, or it reads as squashed */
+        var k = Math.min(sx, sy);
+        var kx = Math.min(sx, k * 1.35), ky = Math.min(sy, k * 1.35);
+        var ox = (W - (x1 - x0) * kx) / 2, oy = (H - (y1 - y0) * ky) / 2;
+        g.notes.forEach(function (n) {
+          P[n.slug].x = ox + (P[n.slug].x - x0) * kx;
+          P[n.slug].y = oy + (P[n.slug].y - y0) * ky;
+        });
+      })();
+
+      var NS = "http://www.w3.org/2000/svg";
+      function tag(t, at) {
+        var e = document.createElementNS(NS, t);
+        for (var k in at) e.setAttribute(k, at[k]);
+        return e;
+      }
+      var lineOf = {}, nodeOf = {};
+      edges.forEach(function (e) {
+        var ln = tag("line", { class: "w-e " + e.kind,
+          x1: P[e.a.slug].x, y1: P[e.a.slug].y, x2: P[e.b.slug].x, y2: P[e.b.slug].y });
+        svg.appendChild(ln);
+        (lineOf[e.a.slug] = lineOf[e.a.slug] || []).push({ ln: ln, other: e.b.slug });
+        (lineOf[e.b.slug] = lineOf[e.b.slug] || []).push({ ln: ln, other: e.a.slug });
+      });
+      g.notes.forEach(function (n) {
+        var gg = tag("g", { class: "w-n", transform: "translate(" + P[n.slug].x + "," + P[n.slug].y + ")" });
+        gg.appendChild(tag("circle", { r: 7 }));
+        var words = n.title.split(" "), lines = [""], k = 0;
+        words.forEach(function (w) {
+          if ((lines[k] + " " + w).trim().length > 16) { k++; lines[k] = w; }
+          else lines[k] = (lines[k] + " " + w).trim();
+        });
+        lines.slice(0, 2).forEach(function (ln, m) {
+          var t = tag("text", { "text-anchor": "middle", y: 25 + m * 9.5 });
+          t.textContent = ln + (m === 1 && lines.length > 2 ? "\u2026" : "");
+          gg.appendChild(t);
+        });
+        gg.addEventListener("click", function () { jump(n.slug); });
+        gg.addEventListener("mouseenter", function () { light(n.slug); });
+        svg.appendChild(gg);
+        nodeOf[n.slug] = gg;
+      });
+      host.hidden = false;
+
+      var current = null;
+      function light(slug) {
+        if (current === slug) return;
+        current = slug;
+        var near = {};
+        (lineOf[slug] || []).forEach(function (x) { near[x.other] = 1; });
+        Object.keys(nodeOf).forEach(function (k) {
+          var c = nodeOf[k];
+          c.classList.toggle("on", k === slug);
+          c.classList.toggle("near", k !== slug && !!near[k]);
+          c.classList.toggle("far", k !== slug && !near[k] && !c.classList.contains("hid"));
+          c.querySelector("circle").setAttribute("r", k === slug ? 15 : (near[k] ? 10 : 6.5));
+        });
+        svg.querySelectorAll(".w-e").forEach(function (l) { l.classList.remove("lit"); });
+        (lineOf[slug] || []).forEach(function (x) { x.ln.classList.add("lit"); });
+      }
+      function jump(slug) {
+        var card = document.getElementById(slug);
+        if (!card) return;
+        card.scrollIntoView({ block: "center", behavior: "smooth" });
+        card.classList.add("lit");
+        setTimeout(function () { card.classList.remove("lit"); }, 1600);
+        light(slug);
+      }
+      function filter(visible) {
+        Object.keys(nodeOf).forEach(function (k) {
+          var on = visible[k];
+          nodeOf[k].style.display = on ? "" : "none";
+        });
+        svg.querySelectorAll(".w-e").forEach(function (l) { l.style.display = ""; });
+        edges.forEach(function (e, i) {
+          var l = svg.querySelectorAll(".w-e")[i];
+          if (l) l.style.display = (visible[e.a.slug] && visible[e.b.slug]) ? "" : "none";
+        });
+      }
+      /* the note you are reading is the note the web is showing */
+      cards.forEach(function (c) {
+        c.addEventListener("mouseenter", function () { light(c.id); });
+      });
+      light(g.notes.slice().sort(function (a, b) {
+        return (lineOf[b.slug] || []).length - (lineOf[a.slug] || []).length;
+      })[0].slug);
+      return { light: light, filter: filter };
+    })();
+
     /* ── FILTERING. search plus at most one facet ──────────────────────── */
     var input   = $("#q");
     var readout = $("#readout");
@@ -537,6 +688,12 @@
       });
       var empty = $("#nothing");
       empty.hidden = shown > 0;
+      var vis = {};
+      g.notes.forEach(function (n) {
+        var c = document.getElementById(n.slug);
+        vis[n.slug] = !!c && !c.hidden;
+      });
+      web.filter(vis);
       document.querySelectorAll("#path-host .chip").forEach(function (b) {
         b.setAttribute("aria-pressed",
           facet && facet.kind === "tag" && b.getAttribute("data-tag") === facet.value ? "true" : "false");
