@@ -282,3 +282,34 @@ html:not(.js) .bar,html:not(.js) .bed{display:none}
   .gh-i:nth-child(3){border-top:1px dashed var(--line-2)}
   .n-t{font-size:14.5px}
 }
+
+
+/* ── THE WEB. the whole garden at once, beside the bed ──────────────────── */
+.split{display:block}
+.web{display:none}
+.web svg{width:100%;height:100%;display:block;overflow:visible}
+.w-e{stroke:rgba(20,24,27,.34);fill:none;stroke-width:1.3}
+.w-e.tag{stroke-dasharray:2 5}
+.w-e.lit{stroke:var(--coral);stroke-width:2;stroke-opacity:1}
+.w-n circle{fill:var(--paper);stroke:var(--ink);stroke-width:1.5;
+  transition:r .2s cubic-bezier(.34,1.8,.5,1),fill .2s}
+.w-n text{font-family:var(--micro);font-size:8.5px;letter-spacing:.04em;
+  fill:var(--ink);pointer-events:none}
+.w-n{cursor:pointer}
+.w-n.far{opacity:.5}
+.w-n.far text{display:none}
+.w-n.near circle{fill:var(--aqua)}
+.w-n.on circle{fill:var(--coral);stroke-width:2.4}
+.w-n:hover circle{fill:var(--pink)}
+.n.lit,.gh-i.lit{outline:2.5px dashed var(--coral);outline-offset:7px}
+
+@media (min-width:1080px){
+  .split{display:grid;grid-template-columns:minmax(0,1fr) clamp(330px,34vw,520px);
+    gap:clamp(26px,3.4vw,54px);align-items:start}
+  .bed{min-width:0}
+  #bed-host{columns:2}
+  .web{display:block;position:sticky;top:14px;height:min(84vh,800px);margin-top:44px}
+}
+@media (min-width:1500px){
+  #bed-host{columns:2}
+}
