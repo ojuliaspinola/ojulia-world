@@ -85,6 +85,43 @@ source: Books
 tags: book, sci-fi
 This series by Adrian Tchaikovsky explores alien evolution, how different species might evolve into intelligent beings. His work is some of the most captivating imaginings of hypotheticals I have ever read. The concept is incredibly unique and it is clear he has a background in zoology. I am really fond of media that goes into the human condition, and this series expands on that exponentially. What is the nature of life?
 
+## The work changes while you're making it
+type: idea
+tags: process, creativity
+source: World
+You may start a project with one idea of how it will end and then find yourself years in to the project and have a different relationship with the idea, the source material... I certainly have.
+
+## De-optimisation
+type: concept
+tags: process, identity, ADHD
+source: World
+You may find yourself in a cycle of optimising every aspect of life. In my struggles with ADHD, I have sought out answers on how to be better at everything when I feel like my brain has been built to resist the type of consistancy and follow through that would surely lead me to a more successful life. I have found that not only does over-optimization take all of the joy out of life for me, it strips my world of the pulp that makes it mine and that makes me, me. When you over-optimize, when you SKIP parts of the process that are essential to understanding what you are doing and essential to helping you become the person that you wish to become, you are completely missing the fucking point. De-optimize. 
+[[The Long Hard Stupid Way]]
+
+## Inheriting Taste
+type: concept
+tags: identity, influence, process
+source: World
+A lot of what I like I can trace back to my family. I am lucky I guess, because I imagine this isn't a shared experience for everyone. My love of the ocean comes from my father, my love of reading comes from my mother, and my love of science fiction is probably a combination of my mother and my brother. My brother is the singular most influencial person in my life when it comes to my taste. I grew up thinking he was the coolest person ever. I was a late 90s baby, with a brother born in 1990. He was the authority on everything that was cool. He new all the best video games, books, music, clothes. I was build on hand-me-downs and I am so grateful for this. 
+
+## Digital Connectedness
+type: concept
+tags: internet, identity, digital gardens
+source: Online
+I think there is a happy medium for how connected a person should be online. I dissapeared from having an online presence and that was detrimental to my relationships and career and overall feeling of belonging. Obviously, we all know it is bad to be too connected online. 
+
+## Authenticity and Creativity Through the AI Restructuring of Work
+type: concept
+tags: cyberfeminism, AI, creativity, work
+source: Online
+AI should help you not replace you. Jobs will change. Your passion and creativity should not. 
+
+## Intimacy with Machines
+type: concept
+tags: cyberfeminism, AI, intimacy
+source: World
+There are some people who tell LLMs things that they wouldn't tell a living human soul. 
+
 ## Digital gardening
 type: source
 source: Online
