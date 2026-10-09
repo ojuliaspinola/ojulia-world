@@ -67,8 +67,6 @@
   mix-blend-mode:multiply;z-index:-1;opacity:.9;transition:opacity .18s}
 .body>a:hover .lab,.body>a:focus-visible .lab{transform:translate(-50%,0) rotate(var(--lr,-3deg)) scale(1.1)}
 .body>a:hover .lab::before,.body>a:focus-visible .lab::before{opacity:1}
-.n{position:absolute;left:var(--nx,50%);top:var(--ny,-14%);font-family:var(--micro);font-size:9px;color:var(--ink);opacity:.8;
-  font-weight:400;font-style:normal;letter-spacing:.08em;transform:translate(-50%,0)}
 .ring{position:absolute;inset:-10%;opacity:0;pointer-events:none;overflow:visible}
 .ring circle{fill:none;stroke:var(--ink);stroke-width:3.5;stroke-linecap:round;stroke-dasharray:13 21;
   transform-origin:50px 50px}
@@ -112,11 +110,11 @@
 @keyframes march{to{stroke-dashoffset:-40}}
 
 /* ── LAYOUT · 390 FIRST ──────────────────────────────────────────────────── */
-#b-art       {--x:80%;--y:41%;--s:calc(30*var(--u));  --lx:44%;--ly:100%;--lr:5deg;  --nx:12%;--ny:-16%}
-#b-about     {--x:22%;--y:47%;--s:calc(30*var(--u));  --lx:70%;--ly:-20%;--lr:-6deg; --nx:99%;--ny:10%}
-#b-contact   {--x:50%;--y:44%;--s:calc(19*var(--u));  --lx:50%;--ly:106%;--lr:4deg;--lf:calc(4.4*var(--u)); --nx:6%;--ny:-30%}
-#b-garden    {--x:21%;--y:64%;--s:calc(31*var(--u));  --lx:60%;--ly:101%;--lr:-4deg;--nx:2%;--ny:-14%}
-#b-portfolio {--x:79%;--y:88%;--s:calc(40*var(--u));  --lx:-6%;--ly:88%;--lr:-4deg;--lf:calc(6.2*var(--u));  --nx:50%;--ny:-16%}
+#b-art       {--x:80%;--y:41%;--s:calc(19*var(--u));  --lx:50%;--ly:100%;--lr:5deg}
+#b-about     {--x:22%;--y:47%;--s:calc(34*var(--u));  --lx:50%;--ly:100%;--lr:-6deg}
+#b-contact   {--x:50%;--y:44%;--s:calc(28*var(--u));  --lx:50%;--ly:102%;--lr:4deg;--lf:calc(5.2*var(--u))}
+#b-garden    {--x:21%;--y:64%;--s:calc(23*var(--u));  --lx:50%;--ly:101%;--lr:-4deg}
+#b-portfolio {--x:79%;--y:88%;--s:calc(44*var(--u));  --lx:50%;--ly:101%;--lr:-4deg;--lf:calc(6.6*var(--u))}
 #g-sub {--x:76%;--y:60%;--s:calc(42*var(--u));--gr:-13deg}
 #g-bts {--x:18%;--y:90%;--s:calc(35*var(--u));--gr:187deg}
 
@@ -132,11 +130,11 @@
   .lab{--lf:2.7vmin}
   .gone .tag{--gf:2.5vmin}
 
-  #b-art       {--x:88%;--y:20%;--s:16vmin; --lx:48%;--ly:102%;--lr:5deg;  --nx:12%;--ny:-18%}
-  #b-contact   {--x:58%;--y:42%;--s:11vmin; --lx:60%;--ly:107%;--lr:4deg;--lf:2.3vmin;--nx:2%;--ny:-32%}
-  #b-about     {--x:45%;--y:72%;--s:21vmin; --lx:56%;--ly:101%;--lr:-6deg; --nx:10%;--ny:-17%}
-  #b-garden    {--x:24%;--y:69%;--s:22vmin; --lx:50%;--ly:102%;--lr:-4deg;--nx:2%;--ny:-15%}
-  #b-portfolio {--x:80%;--y:76%;--s:30vmin; --lx:-10%;--ly:90%;--lr:-4deg;--lf:5.4vmin;--nx:50%;--ny:-18%}
+  #b-art       {--x:85%;--y:19%;--s:13vmin; --lx:50%;--ly:102%;--lr:5deg}
+  #b-contact   {--x:57%;--y:41%;--s:19vmin; --lx:50%;--ly:103%;--lr:4deg;--lf:3vmin}
+  #b-about     {--x:44%;--y:71%;--s:24vmin; --lx:50%;--ly:101%;--lr:-6deg}
+  #b-garden    {--x:22%;--y:68%;--s:16vmin; --lx:50%;--ly:102%;--lr:-4deg}
+  #b-portfolio {--x:78%;--y:77%;--s:32vmin; --lx:50%;--ly:101%;--lr:-4deg;--lf:5.2vmin}
   #g-sub {--x:72%;--y:33%;--s:18vmin;--gr:-13deg}
   #g-bts {--x:10%;--y:94%;--s:24vmin;--gr:187deg}
 }
