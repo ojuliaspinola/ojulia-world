@@ -64,6 +64,10 @@
 .roots svg{width:100%;height:100%}
 
 /* ── THE ROOM ────────────────────────────────────────────────────────────── */
+/* base.css gives .poster overflow:hidden, which makes it the scroll box for
+   anything sticky inside it, and it never scrolls. clip trims the same
+   shapes without that, so the bar and the web can stick. */
+.poster{overflow:clip}
 /* .wrap .top .back .meta .title .mid .note .pill live in base.css */
 .lede{margin:.85em 0 0;font-family:var(--micro);font-size:9px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--teal);max-width:38ch}
@@ -308,7 +312,8 @@ html:not(.js) .bar,html:not(.js) .bed{display:none}
     gap:clamp(26px,3.4vw,54px);align-items:start}
   .bed{min-width:0}
   #bed-host{columns:2}
-  .web{display:block;position:sticky;top:14px;height:min(84vh,800px);margin-top:44px}
+  .web{display:block;position:sticky;top:calc(var(--bar-h,0px) + 14px);
+    height:min(calc(100vh - var(--bar-h,0px) - 28px),800px);margin-top:44px}
 }
 @media (min-width:1500px){
   #bed-host{columns:2}

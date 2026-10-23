@@ -785,6 +785,14 @@
     return;
   }
 
+  /* the web sticks just under the bar, and the bar's height moves with its rows */
+  var bar = $("#sortbar");
+  if (bar && window.ResizeObserver) {
+    new ResizeObserver(function () {
+      document.documentElement.style.setProperty("--bar-h", bar.offsetHeight + "px");
+    }).observe(bar);
+  }
+
   fetch(SRC, { cache: "no-cache" }).then(function (r) {
     if (!r.ok) throw new Error("notes.md came back " + r.status + " " + r.statusText);
     return r.text();
